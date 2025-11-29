@@ -13,7 +13,7 @@ export default function Header() {
         <Link href="/" data-testid="link-home">
           <div className="flex items-center cursor-pointer">
             <span 
-              className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent"
+              className="text-2xl md:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent"
               data-testid="text-logo"
             >
               COARUS AI

@@ -9,8 +9,6 @@ export interface AITool {
   pricing: string;
   fitScore?: number;
   targetUser: "smb" | "individual" | "both";
-  isNsfw?: boolean;
-  nsfwLevel?: "partial" | "yes" | "no";
 }
 
 export const aiTools: AITool[] = [
@@ -409,99 +407,6 @@ export const aiTools: AITool[] = [
     pricing: "Free",
     targetUser: "individual",
   },
-  // Companion / Emotional Support
-  {
-    id: "replika",
-    name: "Replika",
-    description: "AI companion for emotional support, conversation, and romantic simulation.",
-    category: "companion",
-    features: ["Emotional support", "Conversation", "Customizable personality", "Memory"],
-    url: "https://replika.com",
-    keywords: ["companion", "emotional", "chat", "ai friend", "support"],
-    pricing: "Free - $19.99/mo",
-    targetUser: "individual",
-    isNsfw: false,
-    nsfwLevel: "partial",
-  },
-  {
-    id: "paradot",
-    name: "Paradot",
-    description: "Social AI companion focused on emotional bonding and meaningful conversations.",
-    category: "companion",
-    features: ["Emotional bonding", "Personality development", "Memory", "Conversations"],
-    url: "https://www.paradot.ai",
-    keywords: ["companion", "emotional", "social", "bonding", "chat"],
-    pricing: "Free",
-    targetUser: "individual",
-    isNsfw: false,
-    nsfwLevel: "no",
-  },
-  {
-    id: "character-ai",
-    name: "Character.AI",
-    description: "Create and chat with AI characters for roleplay, entertainment, and creative interactions.",
-    category: "companion",
-    features: ["Custom characters", "Roleplay", "Creative conversations", "Persona RP"],
-    url: "https://character.ai",
-    keywords: ["roleplay", "characters", "chat", "creative", "entertainment"],
-    pricing: "Free - $9.99/mo",
-    targetUser: "individual",
-    isNsfw: false,
-    nsfwLevel: "no",
-  },
-  // Adult / NSFW Companion (18+)
-  {
-    id: "kindroid",
-    name: "Kindroid",
-    description: "Customizable AI companion with romantic and intimate conversation options for adults.",
-    category: "adult-companion",
-    features: ["Customizable AI", "Voice messages", "Intimate conversations", "Memory"],
-    url: "https://kindroid.ai",
-    keywords: ["adult", "romantic", "companion", "intimate", "18+"],
-    pricing: "$13.99/mo",
-    targetUser: "individual",
-    isNsfw: true,
-    nsfwLevel: "yes",
-  },
-  {
-    id: "crushon",
-    name: "CrushOn.AI",
-    description: "AI roleplay platform for unfiltered romantic and adult fantasy interactions.",
-    category: "adult-companion",
-    features: ["NSFW roleplay", "Custom characters", "Unfiltered chat", "Scenarios"],
-    url: "https://crushon.ai",
-    keywords: ["adult", "nsfw", "roleplay", "fantasy", "18+"],
-    pricing: "$9.99+/mo",
-    targetUser: "individual",
-    isNsfw: true,
-    nsfwLevel: "yes",
-  },
-  {
-    id: "janitor-ai",
-    name: "Janitor AI",
-    description: "Character-based AI chat platform supporting NSFW content and creative roleplay.",
-    category: "adult-companion",
-    features: ["Character creation", "NSFW support", "API integration", "Community"],
-    url: "https://janitorai.com",
-    keywords: ["adult", "nsfw", "roleplay", "characters", "18+"],
-    pricing: "Free - Premium",
-    targetUser: "individual",
-    isNsfw: true,
-    nsfwLevel: "yes",
-  },
-  {
-    id: "chai-ai",
-    name: "Chai AI",
-    description: "AI chat platform with diverse characters including romantic and adult-oriented bots.",
-    category: "adult-companion",
-    features: ["Many characters", "Romantic options", "Mobile app", "Premium content"],
-    url: "https://chai.ml",
-    keywords: ["chat", "companion", "romantic", "mobile", "ai"],
-    pricing: "Free - $13.99/mo",
-    targetUser: "individual",
-    isNsfw: true,
-    nsfwLevel: "partial",
-  },
 ];
 
 export const categories = [
@@ -515,8 +420,6 @@ export const categories = [
   { slug: "writing", name: "Writing & Content", icon: "PenLine", targetUser: "individual" },
   { slug: "education", name: "Learning & Education", icon: "GraduationCap", targetUser: "individual" },
   { slug: "personal-finance", name: "Personal Finance", icon: "Wallet", targetUser: "individual" },
-  { slug: "companion", name: "AI Companions", icon: "Heart", targetUser: "individual" },
-  { slug: "adult-companion", name: "Adult Companions (18+)", icon: "Flame", targetUser: "individual" },
 ];
 
 export interface MatchResult {
@@ -593,9 +496,7 @@ export function matchToolsForBusiness(
 
 export function matchToolsForIndividual(
   intents: string[],
-  goals: string[],
-  isAdultPath: boolean,
-  contentLevel: string
+  goals: string[]
 ): MatchResult {
   const intentMapping: Record<string, string[]> = {
     "productivity": ["productivity"],
@@ -603,9 +504,7 @@ export function matchToolsForIndividual(
     "learning": ["education"],
     "career": ["writing", "productivity"],
     "finance": ["personal-finance"],
-    "entertainment": ["companion"],
-    "companionship": ["companion"],
-    "adult": ["adult-companion", "companion"],
+    "entertainment": ["productivity", "writing"],
   };
 
   const relevantCategories = new Set<string>();
@@ -614,16 +513,9 @@ export function matchToolsForIndividual(
     cats.forEach(c => relevantCategories.add(c));
   });
 
-  let filteredTools = aiTools
+  const filteredTools = aiTools
     .filter(tool => tool.targetUser === "individual" || tool.targetUser === "both")
     .filter(tool => relevantCategories.has(tool.category));
-
-  // Filter NSFW content based on settings
-  if (!isAdultPath || contentLevel === "companion-only") {
-    filteredTools = filteredTools.filter(tool => !tool.isNsfw);
-  } else if (contentLevel === "romantic") {
-    filteredTools = filteredTools.filter(tool => !tool.isNsfw || tool.nsfwLevel === "partial");
-  }
 
   const scoredTools = filteredTools
     .map(tool => {

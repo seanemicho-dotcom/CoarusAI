@@ -21,8 +21,6 @@ const categoryLabels: Record<string, string> = {
   "writing": "Writing & Content",
   "education": "Learning & Education",
   "personal-finance": "Personal Finance",
-  "companion": "AI Companion",
-  "adult-companion": "Adult Companion (18+)",
 };
 
 export default function EnhancedToolCard({ tool, fitScore, onSave }: EnhancedToolCardProps) {
@@ -40,16 +38,9 @@ export default function EnhancedToolCard({ tool, fitScore, onSave }: EnhancedToo
             <h3 className="text-xl font-semibold mb-1" data-testid={`text-tool-name-${tool.id}`}>
               {tool.name}
             </h3>
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge variant="secondary" className="text-xs">
-                {categoryLabels[tool.category] || tool.category}
-              </Badge>
-              {tool.isNsfw && (
-                <Badge variant="destructive" className="text-xs">
-                  18+
-                </Badge>
-              )}
-            </div>
+            <Badge variant="secondary" className="text-xs">
+              {categoryLabels[tool.category] || tool.category}
+            </Badge>
           </div>
           
           {displayScore > 0 && (

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
 import WizardProgress from "./WizardProgress";
 import StepWelcome from "./StepWelcome";
 import StepBusinessType from "./StepBusinessType";
@@ -8,8 +7,6 @@ import StepBusinessPriorities from "./StepBusinessPriorities";
 import StepWorkflowDetails from "./StepWorkflowDetails";
 import StepPersonalIntent from "./StepPersonalIntent";
 import StepPersonalGoals from "./StepPersonalGoals";
-import StepCompanionType from "./StepCompanionType";
-import StepAgeVerification from "./StepAgeVerification";
 import { 
   type WizardState, 
   type UserPath, 
@@ -66,26 +63,16 @@ export default function Wizard({ onComplete }: WizardProps) {
     
     const result = matchToolsForIndividual(
       state.personalIntents,
-      state.personalGoals,
-      state.isAdultPath,
-      state.contentLevel
+      state.personalGoals
     );
     
     setIsSubmitting(false);
     onComplete(result, state);
   };
 
-  const isAdultPath = state.personalIntents.includes("companionship") || 
-                      state.personalIntents.includes("adult");
-
   // Determine total steps based on path
   const getSmbSteps = () => ["Type", "Problems", "Priorities", "Details"];
-  const getIndividualSteps = () => {
-    if (isAdultPath) {
-      return ["Intent", "Companion", "Boundaries"];
-    }
-    return ["Intent", "Goals"];
-  };
+  const getIndividualSteps = () => ["Intent", "Goals"];
 
   const currentStepLabels = state.path === "smb" 
     ? getSmbSteps() 
@@ -158,62 +145,21 @@ export default function Wizard({ onComplete }: WizardProps) {
           return (
             <StepPersonalIntent
               selected={state.personalIntents}
-              onChange={(val) => {
-                updateState("personalIntents", val);
-                // Check if adult path
-                const hasAdult = val.includes("companionship") || val.includes("adult");
-                updateState("isAdultPath", hasAdult);
-              }}
+              onChange={(val) => updateState("personalIntents", val)}
               onNext={() => setStep(2)}
               onBack={handleBack}
             />
           );
         case 2:
-          // Branch based on adult selection
-          if (isAdultPath) {
-            return (
-              <StepCompanionType
-                selected={state.companionTypes}
-                onChange={(val) => updateState("companionTypes", val)}
-                onNext={() => setStep(3)}
-                onBack={handleBack}
-              />
-            );
-          } else {
-            return (
-              <StepPersonalGoals
-                selected={state.personalGoals}
-                onChange={(val) => updateState("personalGoals", val)}
-                onSubmit={handleIndividualSubmit}
-                onBack={handleBack}
-                isSubmitting={isSubmitting}
-              />
-            );
-          }
-        case 3:
-          // Only for adult path
-          if (isAdultPath) {
-            return (
-              <StepAgeVerification
-                ageVerified={state.ageVerified}
-                contentLevel={state.contentLevel}
-                safeWord={state.safeWord}
-                allowStrongLanguage={state.allowStrongLanguage}
-                noHumiliation={state.noHumiliation}
-                allowFantasyCharacters={state.allowFantasyCharacters}
-                onAgeVerified={(val) => updateState("ageVerified", val)}
-                onContentLevelChange={(val) => updateState("contentLevel", val)}
-                onSafeWordChange={(val) => updateState("safeWord", val)}
-                onAllowStrongLanguageChange={(val) => updateState("allowStrongLanguage", val)}
-                onNoHumiliationChange={(val) => updateState("noHumiliation", val)}
-                onAllowFantasyCharactersChange={(val) => updateState("allowFantasyCharacters", val)}
-                onSubmit={handleIndividualSubmit}
-                onBack={handleBack}
-                isSubmitting={isSubmitting}
-              />
-            );
-          }
-          break;
+          return (
+            <StepPersonalGoals
+              selected={state.personalGoals}
+              onChange={(val) => updateState("personalGoals", val)}
+              onSubmit={handleIndividualSubmit}
+              onBack={handleBack}
+              isSubmitting={isSubmitting}
+            />
+          );
       }
     }
 

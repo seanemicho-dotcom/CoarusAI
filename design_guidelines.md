@@ -1,4 +1,4 @@
-# Coarus AI Design Guidelines
+# COARUS AI Design Guidelines
 
 ## Design Approach
 **System**: Modern SaaS aesthetic inspired by Linear's clarity, Stripe's trustworthiness, and ProductHunt's discovery patterns. Clean, professional interface optimized for business decision-makers who value efficiency and credibility.

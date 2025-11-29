@@ -1,8 +1,8 @@
-# Coarus AI - AI Tool Matchmaker
+# COARUS AI - AI Tool Matchmaker
 
 ## Overview
 
-Coarus AI is a web application designed to help small and medium-sized businesses (SMBs) and individuals discover the right AI tools for their specific needs. The platform uses a guided wizard-based approach where users describe their challenges in plain language, and the system recommends curated AI tools from categories like customer support, marketing, finance, HR, productivity, and personal companions.
+COARUS AI is a web application designed to help small and medium-sized businesses (SMBs) and individuals discover the right AI tools for their specific needs. The platform uses a guided wizard-based approach where users describe their challenges in plain language, and the system recommends curated AI tools from categories like customer support, marketing, finance, HR, productivity, and personal companions.
 
 The application targets non-technical business owners and professionals globally (US, Korea, Latin America, and beyond) who want to leverage AI but don't know which tools to choose. Users complete a simple intake flow, receive personalized recommendations, and can explore tools via direct links (designed for future affiliate/referral integration).
 

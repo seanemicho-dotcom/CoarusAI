@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center mb-4">
               <span className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                COARUS AI
+                COARUS
               </span>
             </div>
             <p className="text-slate-400 max-w-sm mb-6">
@@ -65,7 +65,7 @@ export default function Footer() {
         
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500" data-testid="text-copyright">
-            © 2025 COARUS AI. {t.footer.copyright}
+            © 2025 COARUS. {t.footer.copyright}
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
             <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>

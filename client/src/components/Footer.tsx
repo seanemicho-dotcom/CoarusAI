@@ -1,5 +1,4 @@
 import { Link } from "wouter";
-import { Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
@@ -10,11 +9,11 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <span className="font-semibold text-xl">COARUS AI</span>
+            <div className="flex items-center mb-4">
+              <span className="text-2xl font-bold tracking-tight">
+                <span className="text-primary">COARUS</span>
+                <span className="text-foreground ml-1">AI</span>
+              </span>
             </div>
             <p className="text-muted-foreground max-w-sm">
               {t.footer.tagline}

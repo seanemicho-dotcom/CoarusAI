@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
 import MultiSelectGrid from "./MultiSelectGrid";
 import { businessTypes } from "@/lib/wizard-data";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 
 interface StepBusinessTypeProps {
@@ -14,14 +15,15 @@ interface StepBusinessTypeProps {
 
 export default function StepBusinessType({ selected, onChange, onNext, onBack }: StepBusinessTypeProps) {
   const [otherText, setOtherText] = useState("");
+  const { t } = useLanguage();
 
   return (
     <div className="max-w-2xl mx-auto">
       <h2 className="text-2xl md:text-3xl font-semibold mb-2" data-testid="text-step-title">
-        What type of business are you?
+        {t.wizard.businessType}
       </h2>
       <p className="text-muted-foreground mb-6">
-        Select all that apply to get the most relevant recommendations.
+        {t.wizard.selectAll}
       </p>
       
       <MultiSelectGrid
@@ -42,14 +44,14 @@ export default function StepBusinessType({ selected, onChange, onNext, onBack }:
       
       <div className="flex justify-between mt-8">
         <Button variant="outline" onClick={onBack} data-testid="button-back">
-          Back
+          {t.wizard.back}
         </Button>
         <Button 
           onClick={onNext} 
           disabled={selected.length === 0 && !otherText}
           data-testid="button-next"
         >
-          Next <ArrowRight className="ml-2 w-4 h-4" />
+          {t.wizard.next} <ArrowRight className="ml-2 w-4 h-4" />
         </Button>
       </div>
     </div>

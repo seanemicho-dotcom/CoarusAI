@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, GripVertical, Clock, DollarSign, TrendingUp, Heart, Zap, BarChart } from "lucide-react";
 import { businessPriorities } from "@/lib/wizard-data";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect, useRef } from "react";
 import type { LucideIcon } from "lucide-react";
 
@@ -38,6 +39,7 @@ export default function StepBusinessPriorities({ selected, onChange, onNext, onB
   const [draggedItem, setDraggedItem] = useState<string | null>(null);
   const onChangeRef = useRef(onChange);
   const prevSelectedRef = useRef<string[]>([]);
+  const { t } = useLanguage();
   onChangeRef.current = onChange;
 
   useEffect(() => {
@@ -81,7 +83,7 @@ export default function StepBusinessPriorities({ selected, onChange, onNext, onB
   return (
     <div className="max-w-2xl mx-auto">
       <h2 className="text-2xl md:text-3xl font-semibold mb-2" data-testid="text-step-title">
-        What are your top priorities?
+        {t.wizard.businessPriorities}
       </h2>
       <p className="text-muted-foreground mb-6">
         Drag to rank your top 3 priorities.
@@ -123,10 +125,10 @@ export default function StepBusinessPriorities({ selected, onChange, onNext, onB
       
       <div className="flex justify-between mt-8">
         <Button variant="outline" onClick={onBack} data-testid="button-back">
-          Back
+          {t.wizard.back}
         </Button>
         <Button onClick={onNext} data-testid="button-next">
-          Next <ArrowRight className="ml-2 w-4 h-4" />
+          {t.wizard.next} <ArrowRight className="ml-2 w-4 h-4" />
         </Button>
       </div>
     </div>

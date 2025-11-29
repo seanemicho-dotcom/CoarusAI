@@ -2,11 +2,11 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import LanguageToggle from "./LanguageToggle";
-import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Header() {
   const [location] = useLocation();
-  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const { t } = useLanguage();
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -21,10 +21,7 @@ export default function Header() {
         </Link>
         
         <div className="hidden md:flex items-center gap-4">
-          <LanguageToggle 
-            currentLanguage={currentLanguage}
-            onLanguageChange={setCurrentLanguage}
-          />
+          <LanguageToggle />
         </div>
         
         <nav className="flex items-center gap-4">
@@ -33,12 +30,12 @@ export default function Header() {
               className={`text-sm cursor-pointer transition-colors hidden sm:inline ${location === "/" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               data-testid="link-nav-home"
             >
-              Home
+              {t.header.home}
             </span>
           </Link>
           <Link href="/find-tools">
             <Button data-testid="button-get-started">
-              Find AI Tools
+              {t.header.findTools}
             </Button>
           </Link>
         </nav>

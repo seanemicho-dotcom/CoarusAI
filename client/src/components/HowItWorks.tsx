@@ -1,24 +1,27 @@
 import { MessageSquare, Sparkles, Rocket } from "lucide-react";
-
-const steps = [
-  {
-    icon: MessageSquare,
-    title: "Describe Your Need",
-    description: "Tell us what challenge you're facing in plain language. No technical jargon required.",
-  },
-  {
-    icon: Sparkles,
-    title: "Get Matched",
-    description: "Our system analyzes your needs and finds the best AI tools from our curated database.",
-  },
-  {
-    icon: Rocket,
-    title: "Start Using AI",
-    description: "Explore your personalized recommendations and start transforming your business.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HowItWorks() {
+  const { t } = useLanguage();
+
+  const steps = [
+    {
+      icon: MessageSquare,
+      title: t.home.step1Title,
+      description: t.home.step1Desc,
+    },
+    {
+      icon: Sparkles,
+      title: t.home.step2Title,
+      description: t.home.step2Desc,
+    },
+    {
+      icon: Rocket,
+      title: t.home.step3Title,
+      description: t.home.step3Desc,
+    },
+  ];
+
   return (
     <section className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-6">
@@ -26,16 +29,16 @@ export default function HowItWorks() {
           className="text-3xl md:text-4xl font-semibold text-center mb-4"
           data-testid="text-how-it-works-title"
         >
-          How It Works
+          {t.home.howItWorks}
         </h2>
         <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-          Get personalized AI tool recommendations in three simple steps
+          {t.home.featuresSubtitle}
         </p>
         
         <div className="grid md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
             <div 
-              key={step.title} 
+              key={index} 
               className="text-center"
               data-testid={`card-step-${index + 1}`}
             >

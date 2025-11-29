@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,14 +7,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Globe, ChevronDown } from "lucide-react";
 import { languages } from "@/lib/wizard-data";
+import { useLanguage } from "@/contexts/LanguageContext";
+import type { LanguageCode } from "@/lib/translations";
 
-interface LanguageToggleProps {
-  currentLanguage: string;
-  onLanguageChange: (code: string) => void;
-}
-
-export default function LanguageToggle({ currentLanguage, onLanguageChange }: LanguageToggleProps) {
-  const currentLabel = languages.all.find(l => l.code === currentLanguage)?.label || "EN";
+export default function LanguageToggle() {
+  const { language, setLanguage } = useLanguage();
 
   return (
     <div className="flex items-center gap-1 flex-wrap">
@@ -24,10 +20,10 @@ export default function LanguageToggle({ currentLanguage, onLanguageChange }: La
       {languages.quick.map((lang) => (
         <Button
           key={lang.code}
-          variant={currentLanguage === lang.code ? "secondary" : "ghost"}
+          variant={language === lang.code ? "secondary" : "ghost"}
           size="sm"
           className="h-7 px-2 text-xs"
-          onClick={() => onLanguageChange(lang.code)}
+          onClick={() => setLanguage(lang.code as LanguageCode)}
           data-testid={`lang-${lang.code}`}
         >
           {lang.label}
@@ -44,8 +40,8 @@ export default function LanguageToggle({ currentLanguage, onLanguageChange }: La
           {languages.all.map((lang) => (
             <DropdownMenuItem
               key={lang.code}
-              onClick={() => onLanguageChange(lang.code)}
-              className={currentLanguage === lang.code ? "bg-muted" : ""}
+              onClick={() => setLanguage(lang.code as LanguageCode)}
+              className={language === lang.code ? "bg-muted" : ""}
               data-testid={`lang-dropdown-${lang.code}`}
             >
               {lang.label}

@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { ArrowLeft, Sparkles, Calendar, FileText, Mail } from "lucide-react";
 import EnhancedToolCard from "./EnhancedToolCard";
 import LeadCaptureModal from "./LeadCaptureModal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import type { MatchResult } from "@/lib/tools";
 import type { WizardState, UserPath } from "@/lib/wizard-data";
 
@@ -13,7 +14,6 @@ interface EnhancedResultsViewProps {
   result: MatchResult;
   userPath: UserPath;
   wizardState: WizardState;
-  language?: string;
 }
 
 const categoryLabels: Record<string, string> = {
@@ -35,10 +35,10 @@ export default function EnhancedResultsView({
   result, 
   userPath, 
   wizardState,
-  language = "en"
 }: EnhancedResultsViewProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSource, setModalSource] = useState<LeadSource>("email_results");
+  const { language, t } = useLanguage();
   
   const sessionId = useMemo(() => {
     return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -56,7 +56,7 @@ export default function EnhancedResultsView({
       <div className="mb-8">
         <Link href="/find-tools">
           <Button variant="ghost" className="mb-4" data-testid="button-back">
-            <ArrowLeft className="mr-2 w-4 h-4" /> Start over
+            <ArrowLeft className="mr-2 w-4 h-4" /> {t.results.startOver}
           </Button>
         </Link>
         
@@ -74,7 +74,7 @@ export default function EnhancedResultsView({
             data-testid="button-email-results"
           >
             <Mail className="mr-2 w-4 h-4" />
-            Save Results
+            {t.results.saveResults}
           </Button>
         </div>
         
@@ -83,13 +83,13 @@ export default function EnhancedResultsView({
           data-testid="text-results-title"
         >
           {userPath === "smb" 
-            ? "Recommended AI Solutions for Your Business"
-            : "Recommended AI Tools for You"
+            ? t.results.titleSmb
+            : t.results.titleIndividual
           }
         </h1>
         
         <p className="text-muted-foreground max-w-2xl">
-          Based on your answers, these tools and combinations may fit your needs.
+          {t.results.subtitle}
         </p>
       </div>
       
@@ -110,10 +110,10 @@ export default function EnhancedResultsView({
         <Card className="p-8 bg-primary/5 border-primary/20">
           <div className="text-center max-w-2xl mx-auto">
             <h3 className="text-xl font-semibold mb-2">
-              Want help setting this up?
+              {t.results.helpTitle}
             </h3>
             <p className="text-muted-foreground mb-6">
-              We can integrate these tools, automate workflows, and train your team.
+              {t.results.helpSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button 
@@ -122,7 +122,7 @@ export default function EnhancedResultsView({
                 data-testid="button-book-call"
               >
                 <Calendar className="mr-2 w-4 h-4" />
-                Book Free AI Opportunity Call
+                {t.results.bookCall}
               </Button>
               <Button 
                 size="lg" 
@@ -131,7 +131,7 @@ export default function EnhancedResultsView({
                 data-testid="button-request-quote"
               >
                 <FileText className="mr-2 w-4 h-4" />
-                Request Implementation Quote
+                {t.results.requestQuote}
               </Button>
             </div>
           </div>
@@ -140,10 +140,10 @@ export default function EnhancedResultsView({
         <Card className="p-8 bg-muted/50">
           <div className="text-center max-w-2xl mx-auto">
             <h3 className="text-xl font-semibold mb-2">
-              Want a personalized setup?
+              {t.results.personalSetupTitle}
             </h3>
             <p className="text-muted-foreground mb-6">
-              Book a 1:1 session to get your AI tools configured and working together.
+              {t.results.personalSetupSubtitle}
             </p>
             <Button 
               size="lg" 
@@ -151,7 +151,7 @@ export default function EnhancedResultsView({
               data-testid="button-personal-setup"
             >
               <Calendar className="mr-2 w-4 h-4" />
-              Book Personal AI Setup Session
+              {t.results.personalSetupButton}
             </Button>
           </div>
         </Card>
@@ -160,7 +160,7 @@ export default function EnhancedResultsView({
       <div className="mt-8 text-center">
         <Link href="/find-tools">
           <Button variant="outline" data-testid="button-start-over">
-            Start New Search
+            {t.results.startOver}
           </Button>
         </Link>
       </div>
@@ -171,7 +171,6 @@ export default function EnhancedResultsView({
         source={modalSource}
         wizardState={wizardState}
         recommendedTools={recommendedToolIds}
-        language={language}
       />
     </div>
   );

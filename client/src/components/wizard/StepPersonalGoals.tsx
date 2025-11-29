@@ -2,9 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Loader2, Search, ArrowRight } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import MultiSelectGrid from "./MultiSelectGrid";
 import { personalGoals } from "@/lib/wizard-data";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 
 interface StepPersonalGoalsProps {
@@ -18,11 +19,12 @@ interface StepPersonalGoalsProps {
 export default function StepPersonalGoals({ selected, onChange, onSubmit, onBack, isSubmitting }: StepPersonalGoalsProps) {
   const [hoursToSave, setHoursToSave] = useState(5);
   const [devicePreference, setDevicePreference] = useState("both");
+  const { t } = useLanguage();
 
   return (
     <div className="max-w-2xl mx-auto">
       <h2 className="text-2xl md:text-3xl font-semibold mb-2" data-testid="text-step-title">
-        What do you mainly want to improve or automate?
+        {t.wizard.personalGoals}
       </h2>
       <p className="text-muted-foreground mb-6">
         Select all that apply.
@@ -77,7 +79,7 @@ export default function StepPersonalGoals({ selected, onChange, onSubmit, onBack
       
       <div className="flex justify-between mt-8">
         <Button variant="outline" onClick={onBack} data-testid="button-back">
-          Back
+          {t.wizard.back}
         </Button>
         <Button 
           onClick={onSubmit}
@@ -87,12 +89,12 @@ export default function StepPersonalGoals({ selected, onChange, onSubmit, onBack
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-              Finding tools...
+              {t.wizard.findingTools}
             </>
           ) : (
             <>
               <Search className="mr-2 w-4 h-4" />
-              Get AI Suggestions
+              {t.wizard.getResults}
             </>
           )}
         </Button>

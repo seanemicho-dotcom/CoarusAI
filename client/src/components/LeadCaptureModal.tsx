@@ -13,6 +13,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar, FileText, Mail, User, Loader2 } from "lucide-react";
 import type { WizardState } from "@/lib/wizard-data";
 
@@ -24,34 +25,13 @@ interface LeadCaptureModalProps {
   source: LeadSource;
   wizardState: WizardState;
   recommendedTools?: string[];
-  language?: string;
 }
 
-const sourceConfig: Record<LeadSource, { title: string; description: string; icon: any; buttonText: string }> = {
-  email_results: {
-    title: "Save Your Results",
-    description: "Enter your email to receive your personalized AI tool recommendations.",
-    icon: Mail,
-    buttonText: "Send Results",
-  },
-  book_call: {
-    title: "Book Free AI Opportunity Call",
-    description: "Schedule a free 30-minute call with our AI experts to discuss how we can help your business.",
-    icon: Calendar,
-    buttonText: "Request Call",
-  },
-  request_quote: {
-    title: "Request Implementation Quote",
-    description: "Get a custom quote for AI tool integration, workflow automation, and team training.",
-    icon: FileText,
-    buttonText: "Get Quote",
-  },
-  personal_setup: {
-    title: "Book Personal AI Setup",
-    description: "Schedule a 1:1 session to get your AI tools configured and working together.",
-    icon: User,
-    buttonText: "Book Session",
-  },
+const sourceIcons: Record<LeadSource, any> = {
+  email_results: Mail,
+  book_call: Calendar,
+  request_quote: FileText,
+  personal_setup: User,
 };
 
 export default function LeadCaptureModal({
@@ -60,15 +40,29 @@ export default function LeadCaptureModal({
   source,
   wizardState,
   recommendedTools = [],
-  language = "en",
 }: LeadCaptureModalProps) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const { toast } = useToast();
+  const { language, t } = useLanguage();
   
-  const config = sourceConfig[source];
-  const Icon = config.icon;
+  const Icon = sourceIcons[source];
+
+  const getConfig = () => {
+    switch (source) {
+      case "email_results":
+        return { title: t.leadModal.emailResultsTitle, description: t.leadModal.emailResultsDesc };
+      case "book_call":
+        return { title: t.leadModal.bookCallTitle, description: t.leadModal.bookCallDesc };
+      case "request_quote":
+        return { title: t.leadModal.requestQuoteTitle, description: t.leadModal.requestQuoteDesc };
+      case "personal_setup":
+        return { title: t.leadModal.personalSetupTitle, description: t.leadModal.personalSetupDesc };
+    }
+  };
+
+  const config = getConfig();
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -90,10 +84,10 @@ export default function LeadCaptureModal({
     },
     onSuccess: () => {
       toast({
-        title: "Success!",
+        title: t.leadModal.success,
         description: source === "email_results" 
-          ? "Your results have been saved. Check your email soon!"
-          : "We've received your request and will be in touch shortly!",
+          ? t.leadModal.successEmail
+          : t.leadModal.successBooking,
       });
       setEmail("");
       setName("");
@@ -102,8 +96,8 @@ export default function LeadCaptureModal({
     },
     onError: () => {
       toast({
-        title: "Something went wrong",
-        description: "Please try again or contact us directly.",
+        title: t.leadModal.error,
+        description: t.leadModal.error,
         variant: "destructive",
       });
     },
@@ -130,7 +124,7 @@ export default function LeadCaptureModal({
         
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email *</Label>
+            <Label htmlFor="email">{t.leadModal.email} *</Label>
             <Input
               id="email"
               type="email"
@@ -145,7 +139,7 @@ export default function LeadCaptureModal({
           {source !== "email_results" && (
             <>
               <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t.leadModal.name}</Label>
                 <Input
                   id="name"
                   placeholder="Your name"
@@ -156,14 +150,10 @@ export default function LeadCaptureModal({
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="message">
-                  {source === "request_quote" ? "Project Details" : "Anything else we should know?"}
-                </Label>
+                <Label htmlFor="message">{t.leadModal.message}</Label>
                 <Textarea
                   id="message"
-                  placeholder={source === "request_quote" 
-                    ? "Tell us about your project and goals..."
-                    : "Optional message..."}
+                  placeholder="Tell us more..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   rows={3}
@@ -181,7 +171,7 @@ export default function LeadCaptureModal({
               className="flex-1"
               data-testid="button-cancel-lead"
             >
-              Cancel
+              {t.leadModal.cancel}
             </Button>
             <Button 
               type="submit" 
@@ -192,10 +182,10 @@ export default function LeadCaptureModal({
               {mutation.isPending ? (
                 <>
                   <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                  Submitting...
+                  {t.leadModal.submitting}
                 </>
               ) : (
-                config.buttonText
+                t.leadModal.submit
               )}
             </Button>
           </div>

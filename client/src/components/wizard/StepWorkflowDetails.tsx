@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Loader2, Search } from "lucide-react";
 import { workflowAreas, budgetOptions } from "@/lib/wizard-data";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface StepWorkflowDetailsProps {
   workflowArea: string;
@@ -34,10 +35,12 @@ export default function StepWorkflowDetails({
   onBack,
   isSubmitting,
 }: StepWorkflowDetailsProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="max-w-2xl mx-auto">
       <h2 className="text-2xl md:text-3xl font-semibold mb-2" data-testid="text-step-title">
-        Tell us about your current workflow
+        {t.wizard.workflowArea}
       </h2>
       <p className="text-muted-foreground mb-6">
         This helps us find the best-fit AI solutions for your needs.
@@ -112,7 +115,7 @@ export default function StepWorkflowDetails({
       
       <div className="flex justify-between mt-8">
         <Button variant="outline" onClick={onBack} data-testid="button-back">
-          Back
+          {t.wizard.back}
         </Button>
         <Button 
           onClick={onSubmit} 
@@ -122,12 +125,12 @@ export default function StepWorkflowDetails({
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-              Finding matches...
+              {t.wizard.findingTools}
             </>
           ) : (
             <>
               <Search className="mr-2 w-4 h-4" />
-              Find AI Matches
+              {t.wizard.getResults}
             </>
           )}
         </Button>

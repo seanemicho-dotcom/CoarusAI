@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Building2, User } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import type { UserPath } from "@/lib/wizard-data";
 
 interface StepWelcomeProps {
@@ -7,13 +8,15 @@ interface StepWelcomeProps {
 }
 
 export default function StepWelcome({ onSelect }: StepWelcomeProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="max-w-2xl mx-auto text-center">
       <h1 className="text-3xl md:text-4xl font-semibold mb-3" data-testid="text-welcome-title">
-        Welcome to COARUS AI MATCH
+        {t.wizard.pathQuestion}
       </h1>
       <p className="text-muted-foreground mb-8 text-lg">
-        Tell us who you are and we'll match you with the right AI solutions.
+        {t.home.heroSubtitle}
       </p>
       
       <div className="grid md:grid-cols-2 gap-6">
@@ -26,9 +29,9 @@ export default function StepWelcome({ onSelect }: StepWelcomeProps) {
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
               <Building2 className="w-8 h-8 text-primary" />
             </div>
-            <h2 className="text-xl font-semibold mb-2">I run or work at a business</h2>
+            <h2 className="text-xl font-semibold mb-2">{t.wizard.pathSmb}</h2>
             <p className="text-muted-foreground">
-              Find AI tools for your team, operations, and growth
+              {t.wizard.pathSmbDesc}
             </p>
           </div>
         </Card>
@@ -42,9 +45,9 @@ export default function StepWelcome({ onSelect }: StepWelcomeProps) {
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
               <User className="w-8 h-8 text-primary" />
             </div>
-            <h2 className="text-xl font-semibold mb-2">I am an individual</h2>
+            <h2 className="text-xl font-semibold mb-2">{t.wizard.pathIndividual}</h2>
             <p className="text-muted-foreground">
-              Find AI tools for personal productivity, learning, and more
+              {t.wizard.pathIndividualDesc}
             </p>
           </div>
         </Card>

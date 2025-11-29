@@ -6,7 +6,7 @@ import {
   Gamepad2, Flame, ListTodo, GraduationCap, Wallet, Palette, MessageCircle, 
   HeartHandshake, Drama, Calendar, Target, RefreshCw, FileText, CheckCircle, 
   Feather, Share2, Lightbulb, Globe, Search, Wrench, Compass, Receipt, 
-  PiggyBank, FileSpreadsheet, Music, Sparkles, Smile, MessageSquare
+  PiggyBank, FileSpreadsheet, Music, Sparkles, Smile, MessageSquare, Clapperboard
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -76,6 +76,7 @@ const iconMap: Record<string, LucideIcon> = {
   Sparkles,
   Smile,
   MessageSquare,
+  Clapperboard,
   StickyNote: FileText,
   Linkedin: Users,
 };

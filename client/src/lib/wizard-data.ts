@@ -78,12 +78,11 @@ export const budgetOptions = [
 ];
 
 export const personalIntents = [
-  { id: "productivity", label: "Personal productivity & organization", icon: "Brain" },
-  { id: "writing", label: "Writing & content help", icon: "PenLine" },
-  { id: "learning", label: "Studying, learning, or research", icon: "BookOpen" },
-  { id: "career", label: "Job & career support", icon: "Briefcase" },
-  { id: "finance", label: "Personal finance organization", icon: "DollarSign" },
-  { id: "entertainment", label: "Entertainment / fun / creativity", icon: "Gamepad2" },
+  { id: "productivity", label: "Personal Productivity", icon: "Brain" },
+  { id: "learning", label: "Learning & Skills", icon: "GraduationCap" },
+  { id: "creative", label: "Creative Studio", icon: "Palette" },
+  { id: "writing", label: "Writing & Content", icon: "PenLine" },
+  { id: "companions", label: "AI Companions", icon: "MessageCircle" },
 ];
 
 export const personalGoalsByIntent: Record<string, { id: string; label: string; icon: string }[]> = {
@@ -91,15 +90,8 @@ export const personalGoalsByIntent: Record<string, { id: string; label: string; 
     { id: "organize-tasks", label: "Organize my tasks and to-do lists", icon: "ListTodo" },
     { id: "manage-schedule", label: "Manage my calendar and schedule", icon: "Calendar" },
     { id: "stay-focused", label: "Stay focused and avoid distractions", icon: "Target" },
-    { id: "build-habits", label: "Build better habits and routines", icon: "Repeat" },
-    { id: "take-notes", label: "Take and organize notes effectively", icon: "StickyNote" },
-  ],
-  writing: [
-    { id: "write-emails", label: "Write better emails faster", icon: "Mail" },
-    { id: "write-essays", label: "Help with essays and reports", icon: "FileText" },
-    { id: "improve-grammar", label: "Improve grammar and style", icon: "CheckCircle" },
-    { id: "creative-writing", label: "Creative writing and storytelling", icon: "Feather" },
-    { id: "social-posts", label: "Create social media content", icon: "Share2" },
+    { id: "build-habits", label: "Build better habits and routines", icon: "RefreshCw" },
+    { id: "take-notes", label: "Take and organize notes effectively", icon: "FileText" },
   ],
   learning: [
     { id: "understand-topics", label: "Understand complex topics easily", icon: "Lightbulb" },
@@ -108,27 +100,26 @@ export const personalGoalsByIntent: Record<string, { id: string; label: string; 
     { id: "research", label: "Research and summarize information", icon: "Search" },
     { id: "skill-building", label: "Develop new skills", icon: "Wrench" },
   ],
-  career: [
-    { id: "resume-help", label: "Improve my resume and cover letters", icon: "FileText" },
-    { id: "interview-prep", label: "Prepare for job interviews", icon: "MessageSquare" },
-    { id: "linkedin-profile", label: "Optimize my LinkedIn profile", icon: "Linkedin" },
-    { id: "networking", label: "Networking and professional outreach", icon: "Users" },
-    { id: "career-advice", label: "Get career guidance and advice", icon: "Compass" },
-  ],
-  finance: [
-    { id: "track-spending", label: "Track my spending and expenses", icon: "Receipt" },
-    { id: "budget-planning", label: "Create and stick to a budget", icon: "PiggyBank" },
-    { id: "investment-help", label: "Learn about investing", icon: "TrendingUp" },
-    { id: "tax-help", label: "Organize taxes and documents", icon: "FileSpreadsheet" },
-    { id: "financial-goals", label: "Set and track financial goals", icon: "Target" },
-  ],
-  entertainment: [
-    { id: "ai-chat-companion", label: "Chat with an AI friend or companion", icon: "MessageCircle" },
+  creative: [
     { id: "generate-art", label: "Create AI-generated art and images", icon: "Palette" },
     { id: "create-music", label: "Make music or audio content", icon: "Music" },
+    { id: "video-editing", label: "Edit and enhance videos", icon: "Clapperboard" },
+    { id: "design-graphics", label: "Design graphics and visuals", icon: "Sparkles" },
+    { id: "creative-projects", label: "Fun creative projects and experiments", icon: "Lightbulb" },
+  ],
+  writing: [
+    { id: "write-emails", label: "Write better emails faster", icon: "Mail" },
+    { id: "write-essays", label: "Help with essays and reports", icon: "FileText" },
+    { id: "improve-grammar", label: "Improve grammar and style", icon: "CheckCircle" },
+    { id: "creative-writing", label: "Creative writing and storytelling", icon: "Feather" },
+    { id: "social-posts", label: "Create social media content", icon: "Share2" },
+  ],
+  companions: [
+    { id: "ai-chat-friend", label: "Chat with an AI friend", icon: "MessageCircle" },
+    { id: "roleplay-stories", label: "Interactive stories and roleplay", icon: "BookOpen" },
+    { id: "emotional-support", label: "Emotional support and conversation", icon: "Heart" },
     { id: "gaming-companion", label: "Gaming tips and companions", icon: "Gamepad2" },
-    { id: "creative-fun", label: "Fun creative projects and experiments", icon: "Sparkles" },
-    { id: "stories-roleplay", label: "Interactive stories and roleplay", icon: "BookOpen" },
+    { id: "virtual-assistant", label: "Personal virtual assistant", icon: "Brain" },
   ],
 };
 

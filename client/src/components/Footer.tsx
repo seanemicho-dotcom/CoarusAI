@@ -65,7 +65,7 @@ export default function Footer() {
         
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500" data-testid="text-copyright">
-            © 2025 COARUS. {t.footer.copyright}
+            © 2025 COARUS LLC. {t.footer.copyright}
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
             <a href="#" className="hover:text-slate-300 transition-colors">{t.footer.privacyPolicy}</a>

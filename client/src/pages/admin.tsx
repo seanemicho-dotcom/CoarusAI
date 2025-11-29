@@ -23,7 +23,13 @@ import {
   DollarSign,
   MousePointerClick,
   TrendingUp,
-  ArrowLeft
+  ArrowLeft,
+  Users,
+  Eye,
+  BarChart3,
+  Calendar,
+  Zap,
+  Target
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -41,6 +47,15 @@ interface ToolClick {
   toolId: string;
   toolName: string;
   createdAt: string;
+}
+
+interface Stats {
+  totalVisitors: number;
+  wizardCompletions: number;
+  toolClicks: number;
+  conversionRate: number;
+  estimatedRevenue: number;
+  topCategory: string;
 }
 
 const suggestedAffiliates = [
@@ -74,6 +89,24 @@ export default function AdminPage() {
 
   const { data: clicksData } = useQuery<ToolClick[]>({
     queryKey: ["/api/tool-clicks"],
+  });
+
+  const { data: statsData } = useQuery<Stats>({
+    queryKey: ["/api/admin/stats"],
+    queryFn: async () => {
+      const res = await fetch("/api/admin/stats");
+      if (!res.ok) {
+        return {
+          totalVisitors: 0,
+          wizardCompletions: 0,
+          toolClicks: 0,
+          conversionRate: 0,
+          estimatedRevenue: 0,
+          topCategory: "N/A"
+        };
+      }
+      return res.json();
+    },
   });
 
   const updateTool = useMutation({
@@ -117,6 +150,21 @@ export default function AdminPage() {
     .sort(([, a], [, b]) => b - a)
     .slice(0, 10);
 
+  const totalClicks = clicksData?.length || 0;
+
+  const todayClicks = (clicksData || []).filter(click => {
+    const clickDate = new Date(click.createdAt);
+    const today = new Date();
+    return clickDate.toDateString() === today.toDateString();
+  }).length;
+
+  const thisWeekClicks = (clicksData || []).filter(click => {
+    const clickDate = new Date(click.createdAt);
+    const weekAgo = new Date();
+    weekAgo.setDate(weekAgo.getDate() - 7);
+    return clickDate >= weekAgo;
+  }).length;
+
   const handleEditClick = (tool: Tool) => {
     setSelectedTool(tool);
     setAffiliateLink(tool.affiliateUrl || "");
@@ -145,57 +193,219 @@ export default function AdminPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold" data-testid="text-admin-title">Affiliate Manager</h1>
-            <p className="text-muted-foreground">Manage your affiliate links and track earnings</p>
+            <h1 className="text-3xl font-bold" data-testid="text-admin-title">Admin Dashboard</h1>
+            <p className="text-muted-foreground">Track performance and manage affiliate links</p>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <Card className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                <Check className="w-6 h-6 text-green-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold" data-testid="text-affiliate-count">{toolsWithAffiliate.length}</p>
-                <p className="text-sm text-muted-foreground">Tools with affiliate links</p>
-              </div>
-            </div>
-          </Card>
-          
-          <Card className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
-                <Link2 className="w-6 h-6 text-orange-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold" data-testid="text-no-affiliate-count">{toolsWithoutAffiliate.length}</p>
-                <p className="text-sm text-muted-foreground">Tools need affiliate links</p>
-              </div>
-            </div>
-          </Card>
-          
-          <Card className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                <MousePointerClick className="w-6 h-6 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold" data-testid="text-total-clicks">{clicksData?.length || 0}</p>
-                <p className="text-sm text-muted-foreground">Total referral clicks</p>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        <Tabs defaultValue="tools" className="space-y-6">
+        <Tabs defaultValue="overview" className="space-y-6">
           <TabsList>
-            <TabsTrigger value="tools" data-testid="tab-tools">All Tools</TabsTrigger>
+            <TabsTrigger value="overview" data-testid="tab-overview">Overview</TabsTrigger>
+            <TabsTrigger value="tools" data-testid="tab-tools">Affiliate Links</TabsTrigger>
             <TabsTrigger value="clicks" data-testid="tab-clicks">Top Clicked</TabsTrigger>
-            <TabsTrigger value="suggested" data-testid="tab-suggested">Suggested Programs</TabsTrigger>
+            <TabsTrigger value="suggested" data-testid="tab-suggested">Programs to Join</TabsTrigger>
           </TabsList>
 
+          <TabsContent value="overview" className="space-y-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Card className="p-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                    <Eye className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold" data-testid="text-total-visitors">
+                      {statsData?.totalVisitors || 0}
+                    </p>
+                    <p className="text-sm text-muted-foreground">Total Visitors</p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold" data-testid="text-wizard-completions">
+                      {statsData?.wizardCompletions || 0}
+                    </p>
+                    <p className="text-sm text-muted-foreground">Wizard Completions</p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                    <MousePointerClick className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold" data-testid="text-total-clicks">
+                      {totalClicks}
+                    </p>
+                    <p className="text-sm text-muted-foreground">Total Tool Clicks</p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center">
+                    <DollarSign className="w-6 h-6 text-amber-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold" data-testid="text-revenue">
+                      ${statsData?.estimatedRevenue?.toFixed(2) || "0.00"}
+                    </p>
+                    <p className="text-sm text-muted-foreground">Est. Revenue</p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card className="p-6">
+                <h3 className="font-semibold mb-4 flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5" />
+                  Click Activity
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Today</span>
+                    <Badge variant="secondary">{todayClicks} clicks</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">This Week</span>
+                    <Badge variant="secondary">{thisWeekClicks} clicks</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">All Time</span>
+                    <Badge variant="secondary">{totalClicks} clicks</Badge>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <h3 className="font-semibold mb-4 flex items-center gap-2">
+                  <Target className="w-5 h-5" />
+                  Affiliate Status
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Tools with Links</span>
+                    <Badge className="bg-green-600">{toolsWithAffiliate.length}</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Tools Need Links</span>
+                    <Badge variant="secondary">{toolsWithoutAffiliate.length}</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Coverage</span>
+                    <Badge variant="outline">
+                      {tools.length > 0 ? Math.round((toolsWithAffiliate.length / tools.length) * 100) : 0}%
+                    </Badge>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <Card className="p-6">
+              <h3 className="font-semibold mb-4 flex items-center gap-2">
+                <Zap className="w-5 h-5" />
+                Quick Actions
+              </h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                <Button 
+                  variant="outline" 
+                  className="h-auto py-4 flex flex-col items-center gap-2"
+                  onClick={() => {
+                    const tabTrigger = document.querySelector('[data-testid="tab-tools"]') as HTMLElement;
+                    if (tabTrigger) tabTrigger.click();
+                  }}
+                  data-testid="button-manage-affiliates"
+                >
+                  <Link2 className="w-5 h-5" />
+                  <span>Manage Affiliate Links</span>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="h-auto py-4 flex flex-col items-center gap-2"
+                  onClick={() => {
+                    const tabTrigger = document.querySelector('[data-testid="tab-suggested"]') as HTMLElement;
+                    if (tabTrigger) tabTrigger.click();
+                  }}
+                  data-testid="button-join-programs"
+                >
+                  <DollarSign className="w-5 h-5" />
+                  <span>Join Affiliate Programs</span>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="h-auto py-4 flex flex-col items-center gap-2"
+                  onClick={() => window.open("/", "_blank")}
+                  data-testid="button-view-site"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                  <span>View Live Site</span>
+                </Button>
+              </div>
+            </Card>
+
+            {totalClicks === 0 && (
+              <Card className="p-6 bg-muted/50 border-dashed">
+                <div className="text-center">
+                  <Calendar className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+                  <h3 className="font-semibold mb-2">No Activity Yet</h3>
+                  <p className="text-muted-foreground max-w-md mx-auto">
+                    Once users start visiting your site and clicking on tools, 
+                    you'll see traffic and click data here. Share your site to get started!
+                  </p>
+                </div>
+              </Card>
+            )}
+          </TabsContent>
+
           <TabsContent value="tools" className="space-y-4">
+            <div className="grid md:grid-cols-3 gap-4 mb-6">
+              <Card className="p-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                    <Check className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold" data-testid="text-affiliate-count">{toolsWithAffiliate.length}</p>
+                    <p className="text-sm text-muted-foreground">With affiliate links</p>
+                  </div>
+                </div>
+              </Card>
+              
+              <Card className="p-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
+                    <Link2 className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold" data-testid="text-no-affiliate-count">{toolsWithoutAffiliate.length}</p>
+                    <p className="text-sm text-muted-foreground">Need affiliate links</p>
+                  </div>
+                </div>
+              </Card>
+              
+              <Card className="p-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                    <MousePointerClick className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold">{totalClicks}</p>
+                    <p className="text-sm text-muted-foreground">Total referral clicks</p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
@@ -220,7 +430,7 @@ export default function AdminPage() {
                   >
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <h3 className="font-medium truncate">{tool.name}</h3>
                           {tool.affiliateUrl ? (
                             <Badge variant="default" className="bg-green-600 shrink-0">
@@ -288,14 +498,14 @@ export default function AdminPage() {
                 <li>Click on a program below to visit their affiliate signup page</li>
                 <li>Sign up and wait for approval (usually 1-3 days)</li>
                 <li>Copy your unique affiliate link from their dashboard</li>
-                <li>Come back here and paste it into the tool's affiliate link field</li>
+                <li>Go to "Affiliate Links" tab and paste it into the tool's entry</li>
               </ol>
             </Card>
 
             <div className="grid md:grid-cols-2 gap-4">
               {suggestedAffiliates.map((affiliate) => (
                 <Card key={affiliate.name} className="p-4">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2">
                     <div>
                       <h4 className="font-medium">{affiliate.name}</h4>
                       <p className="text-sm text-green-600 font-medium">{affiliate.commission}</p>

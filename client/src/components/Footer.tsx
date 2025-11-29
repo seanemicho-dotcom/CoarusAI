@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import logoImage from "@assets/coarus-ai-logo_1764437976535.png";
 import { Mail, Linkedin, Twitter } from "lucide-react";
 
 export default function Footer() {
@@ -12,11 +11,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center mb-4">
-              <img 
-                src={logoImage} 
-                alt="COARUS AI" 
-                className="h-8 w-auto"
-              />
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+                COARUS AI
+              </span>
             </div>
             <p className="text-slate-400 max-w-sm mb-6">
               {t.footer.tagline}

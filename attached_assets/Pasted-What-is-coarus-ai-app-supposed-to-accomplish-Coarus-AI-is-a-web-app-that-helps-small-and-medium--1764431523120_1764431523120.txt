@@ -1,0 +1,79 @@
+What is “coarus-ai-app” supposed to accomplish?
+
+Coarus AI is a web app that helps small and medium businesses (and individual professionals) quickly find the right AI tools for their specific needs. Instead of searching hundreds of AI apps manually, users describe what they’re trying to do (e.g. “automate bookkeeping”, “improve customer support”, “create marketing content”), and Coarus AI suggests a short list of relevant AI tools they can try.
+
+What features should it have?
+
+Simple intake UI
+
+A web form where the user selects their type (SMB or individual) and enters their need in plain language (e.g. “I run a small online shop and need help with email marketing and social media”).
+
+AI tool matching
+
+The app compares the user’s stated need against a curated database (tools.json) of AI tools categorized by use case (bookkeeping, invoicing, marketing, customer service, CRM, productivity, project management, education, etc.).
+
+It returns a ranked list of recommended tools with names and short descriptions.
+
+Results view
+
+A results page that shows:
+
+Category matched (e.g. “marketing”)
+
+3–5 recommended AI tools
+
+Links out to each tool’s website (in the future this can become referral/affiliate links).
+
+Future features (not required for MVP but planned)
+
+Multi-step intake (industry, budget, technical level).
+
+Smarter matching using embeddings / LLM behind the scenes.
+
+Email capture so users can save their matches.
+
+Admin dashboard to see what users are searching for.
+
+Who are the users and what will they do with it?
+
+Primary users:
+
+Small and medium business owners (US, Korea, Latin America, and globally).
+
+Solo professionals and creators who want to use AI but don’t know which tools to choose.
+
+What they do:
+
+Go to the Coarus AI site.
+
+Enter a brief description of their needs (e.g. “I need AI for bookkeeping and invoicing” or “I need help writing social media content”).
+
+The app returns recommended AI tools they can click out to and start using.
+
+The goal is to act as an AI tool matchmaker: users describe problems, Coarus suggests solutions.
+
+Does it involve AI capabilities, data processing, user accounts, etc.?
+
+AI capabilities (current MVP):
+
+The initial version uses rule/keyword-based matching against a structured tools.json file.
+
+A later version may call an LLM (e.g. via OpenAI API) to improve matching quality and interpret more complex user inputs.
+
+Data processing:
+
+For MVP, only basic request processing: reading a “need” string from the query or form, comparing it to categories, and returning recommendations.
+
+Future versions may log anonymized search terms and clicks for analytics and better matching, but nothing sensitive or regulated.
+
+User accounts:
+
+No user accounts or authentication in the MVP.
+
+All usage is anonymous; users just visit the site, type in needs, and see recommendations.
+
+Scope and safety:
+
+The app is focused on business, productivity, and education AI tools.
+
+No 18+ / NSFW or sensitive categories are included.

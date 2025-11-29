@@ -2,12 +2,17 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Check, Star, Bookmark } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 import type { AITool } from "@/lib/tools";
 
 interface EnhancedToolCardProps {
   tool: AITool;
   fitScore?: number;
   onSave?: () => void;
+  sessionId?: string;
+  userPath?: string;
+  language?: string;
 }
 
 const categoryLabels: Record<string, string> = {
@@ -23,8 +28,30 @@ const categoryLabels: Record<string, string> = {
   "personal-finance": "Personal Finance",
 };
 
-export default function EnhancedToolCard({ tool, fitScore, onSave }: EnhancedToolCardProps) {
+export default function EnhancedToolCard({ 
+  tool, 
+  fitScore, 
+  onSave,
+  sessionId,
+  userPath,
+  language = "en"
+}: EnhancedToolCardProps) {
+  
+  const trackClick = useMutation({
+    mutationFn: async () => {
+      return apiRequest("POST", "/api/tool-clicks", {
+        toolId: tool.id,
+        toolName: tool.name,
+        toolUrl: tool.url,
+        sessionId,
+        userPath,
+        language,
+      });
+    },
+  });
+
   const handleVisit = () => {
+    trackClick.mutate();
     window.open(tool.url, "_blank", "noopener,noreferrer");
   };
 

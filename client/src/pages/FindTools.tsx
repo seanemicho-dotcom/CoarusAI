@@ -28,6 +28,7 @@ export default function FindTools() {
           <EnhancedResultsView 
             result={result}
             userPath={wizardState.path!}
+            wizardState={wizardState}
           />
         ) : (
           <Wizard onComplete={handleComplete} />

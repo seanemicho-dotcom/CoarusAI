@@ -98,7 +98,7 @@ export default function EnhancedResultsView({
           <EnhancedToolCard 
             key={tool.id} 
             tool={tool}
-            fitScore={result.fitScores.get(tool.id)}
+            fitScore={tool.fitScore}
             sessionId={sessionId}
             userPath={userPath}
             language={language}

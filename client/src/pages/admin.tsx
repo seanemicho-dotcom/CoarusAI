@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import { Card } from "@/components/ui/card";
@@ -29,7 +29,8 @@ import {
   BarChart3,
   Calendar,
   Zap,
-  Target
+  Target,
+  Lock
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -71,12 +72,115 @@ const suggestedAffiliates = [
   { name: "Loom", url: "https://www.loom.com/affiliates", commission: "15% recurring" },
 ];
 
+function LoginScreen({ onLogin }: { onLogin: (password: string) => void }) {
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+    
+    try {
+      const res = await fetch("/api/admin/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      
+      if (res.ok) {
+        localStorage.setItem("admin_authenticated", "true");
+        onLogin(password);
+      } else {
+        setError("Incorrect password. Please try again.");
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center p-6">
+      <Card className="w-full max-w-md p-8">
+        <div className="text-center mb-6">
+          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Lock className="w-8 h-8 text-primary" />
+          </div>
+          <h1 className="text-2xl font-bold">Admin Access</h1>
+          <p className="text-muted-foreground mt-2">Enter your password to continue</p>
+        </div>
+        
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <Input
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="text-center text-lg"
+              data-testid="input-admin-password"
+              autoFocus
+            />
+          </div>
+          
+          {error && (
+            <p className="text-sm text-destructive text-center">{error}</p>
+          )}
+          
+          <Button 
+            type="submit" 
+            className="w-full" 
+            disabled={!password || isLoading}
+            data-testid="button-admin-login"
+          >
+            {isLoading ? "Checking..." : "Enter Dashboard"}
+          </Button>
+        </form>
+        
+        <div className="mt-6 text-center">
+          <Link href="/">
+            <Button variant="ghost" size="sm" data-testid="button-back-to-site">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to site
+            </Button>
+          </Link>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
 export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTool, setSelectedTool] = useState<Tool | null>(null);
   const [affiliateLink, setAffiliateLink] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const savedAuth = localStorage.getItem("admin_authenticated");
+      if (savedAuth === "true") {
+        try {
+          const res = await fetch("/api/admin/check");
+          if (res.ok) {
+            setIsAuthenticated(true);
+          } else {
+            localStorage.removeItem("admin_authenticated");
+          }
+        } catch {
+          localStorage.removeItem("admin_authenticated");
+        }
+      }
+      setIsCheckingAuth(false);
+    };
+    checkAuth();
+  }, []);
 
   const { data: toolsData, isLoading: toolsLoading } = useQuery<{ tools: Tool[]; total: number }>({
     queryKey: ["/api/ai-tools"],
@@ -85,10 +189,12 @@ export default function AdminPage() {
       if (!res.ok) throw new Error("Failed to fetch tools");
       return res.json();
     },
+    enabled: isAuthenticated,
   });
 
   const { data: clicksData } = useQuery<ToolClick[]>({
     queryKey: ["/api/tool-clicks"],
+    enabled: isAuthenticated,
   });
 
   const { data: statsData } = useQuery<Stats>({
@@ -107,6 +213,7 @@ export default function AdminPage() {
       }
       return res.json();
     },
+    enabled: isAuthenticated,
   });
 
   const updateTool = useMutation({
@@ -131,6 +238,23 @@ export default function AdminPage() {
       });
     },
   });
+
+  const handleLogout = () => {
+    localStorage.removeItem("admin_authenticated");
+    setIsAuthenticated(false);
+  };
+
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <LoginScreen onLogin={() => setIsAuthenticated(true)} />;
+  }
 
   const tools = toolsData?.tools || [];
   
@@ -186,16 +310,21 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto px-6 py-8">
-        <div className="flex items-center gap-4 mb-8">
-          <Link href="/">
-            <Button variant="ghost" size="icon" data-testid="button-back-home">
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-          </Link>
-          <div>
-            <h1 className="text-3xl font-bold" data-testid="text-admin-title">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Track performance and manage affiliate links</p>
+        <div className="flex items-center justify-between gap-4 mb-8">
+          <div className="flex items-center gap-4">
+            <Link href="/">
+              <Button variant="ghost" size="icon" data-testid="button-back-home">
+                <ArrowLeft className="w-5 h-5" />
+              </Button>
+            </Link>
+            <div>
+              <h1 className="text-3xl font-bold" data-testid="text-admin-title">Admin Dashboard</h1>
+              <p className="text-muted-foreground">Track performance and manage affiliate links</p>
+            </div>
           </div>
+          <Button variant="outline" onClick={handleLogout} data-testid="button-logout">
+            Log out
+          </Button>
         </div>
 
         <Tabs defaultValue="overview" className="space-y-6">

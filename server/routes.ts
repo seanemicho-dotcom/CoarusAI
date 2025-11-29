@@ -15,6 +15,38 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  
+  // ============================================
+  // ADMIN AUTHENTICATION
+  // ============================================
+  
+  // Verify admin password
+  app.post("/api/admin/verify", async (req, res) => {
+    const { password } = req.body;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    
+    if (!adminPassword) {
+      // No password set - allow access (development mode)
+      return res.json({ success: true });
+    }
+    
+    if (password === adminPassword) {
+      return res.json({ success: true });
+    }
+    
+    return res.status(401).json({ error: "Invalid password" });
+  });
+  
+  // Check if admin auth is configured
+  app.get("/api/admin/check", async (req, res) => {
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminPassword) {
+      // No password set - allow access
+      return res.json({ configured: false });
+    }
+    return res.json({ configured: true });
+  });
+
   // Create a new lead (email capture, book call, request quote)
   app.post("/api/leads", async (req, res) => {
     try {

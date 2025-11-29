@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center mb-4">
               <span className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                COARUS
+                COARUS AI
               </span>
             </div>
             <p className="text-slate-400 max-w-sm mb-6">

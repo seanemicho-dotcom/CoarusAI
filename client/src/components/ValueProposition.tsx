@@ -1,26 +1,26 @@
-import { Check, Sparkles, Target, TrendingUp, Users } from "lucide-react";
+import { Check, Sparkles, Target, TrendingUp, Users, Building2, User } from "lucide-react";
 
 export default function ValueProposition() {
   const benefits = [
     {
-      icon: Target,
-      title: "Discover AI opportunities",
-      description: "Find the right AI tools for your specific business challenges",
+      icon: Building2,
+      title: "For Businesses",
+      description: "Automate workflows, boost productivity, and scale operations with AI",
+    },
+    {
+      icon: User,
+      title: "For Individuals", 
+      description: "Personal AI assistants, learning tools, and creative companions",
     },
     {
       icon: Sparkles,
-      title: "Stay ahead of the curve", 
-      description: "Access the latest AI tools as soon as they launch",
+      title: "Always Fresh",
+      description: "New AI tools added weekly – never miss the latest innovations",
     },
     {
-      icon: TrendingUp,
-      title: "Maximize ROI",
-      description: "Get personalized recommendations based on your needs and budget",
-    },
-    {
-      icon: Users,
-      title: "No expertise required",
-      description: "Plain-language guidance, no technical knowledge needed",
+      icon: Target,
+      title: "Personalized Matches",
+      description: "Get recommendations tailored to your specific needs and goals",
     },
   ];
 
@@ -30,24 +30,24 @@ export default function ValueProposition() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-              Most SMBs don't know what{" "}
+              Most people don't know what{" "}
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 AI can already do
               </span>{" "}
               for them
             </h2>
             <p className="text-slate-300 text-lg mb-6 leading-relaxed">
-              Every week, new AI tools launch that can automate customer support, generate marketing content, analyze data, and streamline operations. But most small and mid-size companies don't have time to track what's possible.
+              Every week, new AI tools launch – for business automation, personal productivity, creative projects, learning, and more. But most people don't have time to track what's possible or figure out which tools actually work.
             </p>
             <p className="text-slate-400 mb-8">
-              COARUS AI helps you discover the right AI tools for your specific needs – without the hype or technical jargon.
+              Whether you're running a business or looking for personal AI tools, COARUS AI helps you discover the right solutions – without the hype or technical jargon.
             </p>
             
             <div className="space-y-3">
               {[
                 "Curated recommendations from 155+ verified AI tools",
                 "Updated weekly with the latest launches",
-                "Personalized matches based on your industry and goals",
+                "Two paths: Business tools OR Personal AI companions",
                 "Free, no signup required",
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 text-slate-300">

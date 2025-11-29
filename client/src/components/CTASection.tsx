@@ -15,7 +15,7 @@ export default function CTASection() {
           className="text-3xl md:text-4xl font-bold text-white mb-4"
           data-testid="text-cta-headline"
         >
-          Ready to Discover <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">AI Tools</span> for Your Business?
+          Ready to Discover the Perfect <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">AI Tools</span> for You?
         </h2>
         <p className="text-slate-300 mb-10 text-lg max-w-2xl mx-auto">
           {t.home.ctaSubtitle}

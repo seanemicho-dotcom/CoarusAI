@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight, Search, Building2, User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Hero() {
@@ -13,7 +13,7 @@ export default function Hero() {
       
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center py-24">
         <p className="text-primary/90 font-medium mb-4 tracking-wide uppercase text-sm">
-          Practical AI for Real Businesses
+          AI Tools for Everyone
         </p>
         
         <h1 
@@ -21,7 +21,7 @@ export default function Hero() {
           data-testid="text-hero-headline"
         >
           {t.home.heroTitle.split(' ').map((word, i) => 
-            ['AI', 'Tools', 'Perfect', 'Business'].includes(word) ? (
+            ['AI', 'Tools', 'Perfect', 'You'].includes(word) ? (
               <span key={i} className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{word} </span>
             ) : (
               <span key={i}>{word} </span>
@@ -49,9 +49,17 @@ export default function Hero() {
           </Link>
         </div>
         
-        <p className="text-slate-400 text-sm max-w-xl mx-auto">
-          For SMBs and professionals who want practical AI – not buzzwords – embedded into real workflows.
-        </p>
+        <div className="flex items-center justify-center gap-6 text-slate-400 text-sm flex-wrap">
+          <div className="flex items-center gap-2">
+            <Building2 className="w-4 h-4" />
+            <span>{t.wizard.pathSmb}</span>
+          </div>
+          <div className="w-1 h-1 rounded-full bg-slate-600" />
+          <div className="flex items-center gap-2">
+            <User className="w-4 h-4" />
+            <span>{t.wizard.pathIndividual}</span>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -4,22 +4,34 @@ import { Slider } from "@/components/ui/slider";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Loader2, Search } from "lucide-react";
 import MultiSelectGrid from "./MultiSelectGrid";
-import { personalGoals } from "@/lib/wizard-data";
+import { getPersonalGoalsForIntents } from "@/lib/wizard-data";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 interface StepPersonalGoalsProps {
   selected: string[];
+  selectedIntents: string[];
   onChange: (selected: string[]) => void;
   onSubmit: () => void;
   onBack: () => void;
   isSubmitting: boolean;
 }
 
-export default function StepPersonalGoals({ selected, onChange, onSubmit, onBack, isSubmitting }: StepPersonalGoalsProps) {
+export default function StepPersonalGoals({ 
+  selected, 
+  selectedIntents,
+  onChange, 
+  onSubmit, 
+  onBack, 
+  isSubmitting 
+}: StepPersonalGoalsProps) {
   const [hoursToSave, setHoursToSave] = useState(5);
   const [devicePreference, setDevicePreference] = useState("both");
   const { t } = useLanguage();
+
+  const goalOptions = useMemo(() => {
+    return getPersonalGoalsForIntents(selectedIntents);
+  }, [selectedIntents]);
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -31,7 +43,7 @@ export default function StepPersonalGoals({ selected, onChange, onSubmit, onBack
       </p>
       
       <MultiSelectGrid
-        options={personalGoals}
+        options={goalOptions}
         selected={selected}
         onChange={onChange}
         columns={2}

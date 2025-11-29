@@ -31,6 +31,14 @@ export default function Wizard({ onComplete }: WizardProps) {
     setState(prev => ({ ...prev, [key]: value }));
   };
 
+  const handleIntentChange = (intents: string[]) => {
+    setState(prev => ({ 
+      ...prev, 
+      personalIntents: intents,
+      personalGoals: []
+    }));
+  };
+
   const handlePathSelect = (path: UserPath) => {
     updateState("path", path);
     setStep(1);
@@ -145,7 +153,7 @@ export default function Wizard({ onComplete }: WizardProps) {
           return (
             <StepPersonalIntent
               selected={state.personalIntents}
-              onChange={(val) => updateState("personalIntents", val)}
+              onChange={handleIntentChange}
               onNext={() => setStep(2)}
               onBack={handleBack}
             />
@@ -154,6 +162,7 @@ export default function Wizard({ onComplete }: WizardProps) {
           return (
             <StepPersonalGoals
               selected={state.personalGoals}
+              selectedIntents={state.personalIntents}
               onChange={(val) => updateState("personalGoals", val)}
               onSubmit={handleIndividualSubmit}
               onBack={handleBack}

@@ -1,5 +1,13 @@
 import { Card } from "@/components/ui/card";
-import { Check, Building2, Factory, ShoppingBag, Briefcase, Code, UtensilsCrossed, Truck, HeadphonesIcon, TrendingUp, Megaphone, Mail, BarChart3, Calculator, BookOpen, Users, Workflow, Clock, DollarSign, Heart, Zap, BarChart, Brain, PenLine, Gamepad2, Flame, ListTodo, GraduationCap, Wallet, Palette, MessageCircle, HeartHandshake, Drama } from "lucide-react";
+import { 
+  Check, Building2, Factory, ShoppingBag, Briefcase, Code, UtensilsCrossed, Truck, 
+  HeadphonesIcon, TrendingUp, Megaphone, Mail, BarChart3, Calculator, BookOpen, 
+  Users, Workflow, Clock, DollarSign, Heart, Zap, BarChart, Brain, PenLine, 
+  Gamepad2, Flame, ListTodo, GraduationCap, Wallet, Palette, MessageCircle, 
+  HeartHandshake, Drama, Calendar, Target, RefreshCw, FileText, CheckCircle, 
+  Feather, Share2, Lightbulb, Globe, Search, Wrench, Compass, Receipt, 
+  PiggyBank, FileSpreadsheet, Music, Sparkles, Smile, MessageSquare
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface Option {
@@ -48,6 +56,28 @@ const iconMap: Record<string, LucideIcon> = {
   MessageCircle,
   HeartHandshake,
   Drama,
+  Calendar,
+  Target,
+  RefreshCw,
+  Repeat: RefreshCw,
+  FileText,
+  CheckCircle,
+  Feather,
+  Share2,
+  Lightbulb,
+  Globe,
+  Search,
+  Wrench,
+  Compass,
+  Receipt,
+  PiggyBank,
+  FileSpreadsheet,
+  Music,
+  Sparkles,
+  Smile,
+  MessageSquare,
+  StickyNote: FileText,
+  Linkedin: Users,
 };
 
 export default function MultiSelectGrid({ options, selected, onChange, columns = 2 }: MultiSelectGridProps) {

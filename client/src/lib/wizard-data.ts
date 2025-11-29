@@ -86,14 +86,84 @@ export const personalIntents = [
   { id: "entertainment", label: "Entertainment / fun / creativity", icon: "Gamepad2" },
 ];
 
-export const personalGoals = [
-  { id: "organize", label: "Organize my tasks, schedule, and life", icon: "ListTodo" },
-  { id: "write-faster", label: "Write faster (emails, essays, reports)", icon: "PenLine" },
-  { id: "learn-faster", label: "Learn faster or understand complex topics", icon: "GraduationCap" },
-  { id: "job-tasks", label: "Get help with job tasks", icon: "Briefcase" },
-  { id: "track-finances", label: "Track and plan my personal finances", icon: "Wallet" },
-  { id: "creative", label: "Generate creative content", icon: "Palette" },
+export const personalGoalsByIntent: Record<string, { id: string; label: string; icon: string }[]> = {
+  productivity: [
+    { id: "organize-tasks", label: "Organize my tasks and to-do lists", icon: "ListTodo" },
+    { id: "manage-schedule", label: "Manage my calendar and schedule", icon: "Calendar" },
+    { id: "stay-focused", label: "Stay focused and avoid distractions", icon: "Target" },
+    { id: "build-habits", label: "Build better habits and routines", icon: "Repeat" },
+    { id: "take-notes", label: "Take and organize notes effectively", icon: "StickyNote" },
+  ],
+  writing: [
+    { id: "write-emails", label: "Write better emails faster", icon: "Mail" },
+    { id: "write-essays", label: "Help with essays and reports", icon: "FileText" },
+    { id: "improve-grammar", label: "Improve grammar and style", icon: "CheckCircle" },
+    { id: "creative-writing", label: "Creative writing and storytelling", icon: "Feather" },
+    { id: "social-posts", label: "Create social media content", icon: "Share2" },
+  ],
+  learning: [
+    { id: "understand-topics", label: "Understand complex topics easily", icon: "Lightbulb" },
+    { id: "learn-language", label: "Learn a new language", icon: "Globe" },
+    { id: "study-help", label: "Get homework and study help", icon: "GraduationCap" },
+    { id: "research", label: "Research and summarize information", icon: "Search" },
+    { id: "skill-building", label: "Develop new skills", icon: "Wrench" },
+  ],
+  career: [
+    { id: "resume-help", label: "Improve my resume and cover letters", icon: "FileText" },
+    { id: "interview-prep", label: "Prepare for job interviews", icon: "MessageSquare" },
+    { id: "linkedin-profile", label: "Optimize my LinkedIn profile", icon: "Linkedin" },
+    { id: "networking", label: "Networking and professional outreach", icon: "Users" },
+    { id: "career-advice", label: "Get career guidance and advice", icon: "Compass" },
+  ],
+  finance: [
+    { id: "track-spending", label: "Track my spending and expenses", icon: "Receipt" },
+    { id: "budget-planning", label: "Create and stick to a budget", icon: "PiggyBank" },
+    { id: "investment-help", label: "Learn about investing", icon: "TrendingUp" },
+    { id: "tax-help", label: "Organize taxes and documents", icon: "FileSpreadsheet" },
+    { id: "financial-goals", label: "Set and track financial goals", icon: "Target" },
+  ],
+  entertainment: [
+    { id: "ai-chat-companion", label: "Chat with an AI friend or companion", icon: "MessageCircle" },
+    { id: "generate-art", label: "Create AI-generated art and images", icon: "Palette" },
+    { id: "create-music", label: "Make music or audio content", icon: "Music" },
+    { id: "gaming-companion", label: "Gaming tips and companions", icon: "Gamepad2" },
+    { id: "creative-fun", label: "Fun creative projects and experiments", icon: "Sparkles" },
+    { id: "stories-roleplay", label: "Interactive stories and roleplay", icon: "BookOpen" },
+  ],
+};
+
+export const defaultPersonalGoals = [
+  { id: "save-time", label: "Save time on daily tasks", icon: "Clock" },
+  { id: "be-creative", label: "Be more creative", icon: "Palette" },
+  { id: "learn-something", label: "Learn something new", icon: "GraduationCap" },
+  { id: "have-fun", label: "Have fun and be entertained", icon: "Smile" },
+  { id: "stay-organized", label: "Stay organized", icon: "ListTodo" },
 ];
+
+export function getPersonalGoalsForIntents(selectedIntents: string[]): { id: string; label: string; icon: string }[] {
+  if (selectedIntents.length === 0) {
+    return defaultPersonalGoals;
+  }
+  
+  const goalsSet = new Map<string, { id: string; label: string; icon: string }>();
+  
+  for (const intent of selectedIntents) {
+    const intentGoals = personalGoalsByIntent[intent];
+    if (intentGoals) {
+      for (const goal of intentGoals) {
+        if (!goalsSet.has(goal.id)) {
+          goalsSet.set(goal.id, goal);
+        }
+      }
+    }
+  }
+  
+  if (goalsSet.size === 0) {
+    return defaultPersonalGoals;
+  }
+  
+  return Array.from(goalsSet.values());
+}
 
 export const languages = {
   quick: [

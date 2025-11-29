@@ -32,7 +32,7 @@ export const aiTools: AITool[] = [
     features: ["Freddy AI", "Auto-assign", "Knowledge base", "Team inbox"],
     url: "https://freshdesk.com",
     keywords: ["customer service", "support", "tickets", "automation", "help desk"],
-    pricing: "$18+/mo",
+    pricing: "from $18/mo",
     targetUser: "smb",
   },
   {
@@ -200,7 +200,7 @@ export const aiTools: AITool[] = [
     features: ["Visual planner", "Link in bio", "Best time to post", "Analytics"],
     url: "https://later.com",
     keywords: ["social media", "instagram", "tiktok", "pinterest", "scheduling"],
-    pricing: "$18+/mo",
+    pricing: "from $18/mo",
     targetUser: "both",
   },
   {
@@ -211,7 +211,7 @@ export const aiTools: AITool[] = [
     features: ["Content planner", "Competitor analysis", "Reports", "Ad management"],
     url: "https://metricool.com",
     keywords: ["social media", "analytics", "scheduling", "competitors"],
-    pricing: "$18+/mo",
+    pricing: "from $18/mo",
     targetUser: "both",
   },
   // Finance & Accounting

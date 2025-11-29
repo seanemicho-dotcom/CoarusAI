@@ -1,4 +1,3 @@
-import { MessageSquare, Sparkles, Rocket } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HowItWorks() {
@@ -6,32 +5,33 @@ export default function HowItWorks() {
 
   const steps = [
     {
-      icon: MessageSquare,
+      number: "01",
       title: t.home.step1Title,
       description: t.home.step1Desc,
+      tag: "Free",
     },
     {
-      icon: Sparkles,
+      number: "02",
       title: t.home.step2Title,
       description: t.home.step2Desc,
     },
     {
-      icon: Rocket,
+      number: "03",
       title: t.home.step3Title,
       description: t.home.step3Desc,
     },
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-24 bg-slate-950">
       <div className="max-w-6xl mx-auto px-6">
         <h2 
-          className="text-3xl md:text-4xl font-semibold text-center mb-4"
+          className="text-3xl md:text-4xl font-bold text-center mb-4 text-white"
           data-testid="text-how-it-works-title"
         >
-          {t.home.howItWorks}
+          How It <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Works</span>
         </h2>
-        <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+        <p className="text-slate-400 text-center mb-16 max-w-2xl mx-auto">
           {t.home.featuresSubtitle}
         </p>
         
@@ -39,15 +39,21 @@ export default function HowItWorks() {
           {steps.map((step, index) => (
             <div 
               key={index} 
-              className="text-center"
+              className="relative p-6 rounded-xl border border-slate-800 bg-slate-900/50 hover:border-blue-500/30 transition-colors"
               data-testid={`card-step-${index + 1}`}
             >
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <step.icon className="w-8 h-8 text-primary" />
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  {step.number}
+                </span>
+                {step.tag && (
+                  <span className="px-2 py-1 text-xs font-medium bg-primary/20 text-primary rounded">
+                    {step.tag}
+                  </span>
+                )}
               </div>
-              <div className="text-sm text-muted-foreground mb-2">Step {index + 1}</div>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-muted-foreground">{step.description}</p>
+              <h3 className="text-xl font-semibold mb-3 text-white">{step.title}</h3>
+              <p className="text-slate-400 leading-relaxed">{step.description}</p>
             </div>
           ))}
         </div>

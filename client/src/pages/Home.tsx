@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import ValueProposition from "@/components/ValueProposition";
 import HowItWorks from "@/components/HowItWorks";
 import CategoryGrid from "@/components/CategoryGrid";
 import CTASection from "@/components/CTASection";
@@ -11,8 +12,9 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <HowItWorks />
+        <ValueProposition />
         <CategoryGrid />
+        <HowItWorks />
         <CTASection />
       </main>
       <Footer />

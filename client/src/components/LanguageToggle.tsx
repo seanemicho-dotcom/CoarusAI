@@ -15,14 +15,14 @@ export default function LanguageToggle() {
 
   return (
     <div className="flex items-center gap-1 flex-wrap">
-      <Globe className="w-4 h-4 text-muted-foreground mr-1" />
+      <Globe className="w-4 h-4 text-slate-400 mr-1" />
       
       {languages.quick.map((lang) => (
         <Button
           key={lang.code}
           variant={language === lang.code ? "secondary" : "ghost"}
           size="sm"
-          className="h-7 px-2 text-xs"
+          className={`h-7 px-2 text-xs ${language === lang.code ? "bg-slate-700 text-white" : "text-slate-300 hover:text-white hover:bg-slate-800"}`}
           onClick={() => setLanguage(lang.code as LanguageCode)}
           data-testid={`lang-${lang.code}`}
         >
@@ -32,16 +32,16 @@ export default function LanguageToggle() {
       
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" data-testid="lang-more">
+          <Button variant="ghost" size="sm" className="h-7 px-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800" data-testid="lang-more">
             More <ChevronDown className="ml-1 w-3 h-3" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="max-h-[300px] overflow-y-auto">
+        <DropdownMenuContent align="end" className="max-h-[300px] overflow-y-auto bg-slate-900 border-slate-700">
           {languages.all.map((lang) => (
             <DropdownMenuItem
               key={lang.code}
               onClick={() => setLanguage(lang.code as LanguageCode)}
-              className={language === lang.code ? "bg-muted" : ""}
+              className={`text-slate-300 hover:text-white hover:bg-slate-800 ${language === lang.code ? "bg-slate-700 text-white" : ""}`}
               data-testid={`lang-dropdown-${lang.code}`}
             >
               {lang.label}

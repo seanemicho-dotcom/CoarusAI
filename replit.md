@@ -42,13 +42,28 @@ Preferred communication style: Simple, everyday language.
 
 **ORM**: Drizzle ORM provides type-safe database access with PostgreSQL as the target dialect.
 
-**Database Schema**: Currently defines a minimal `users` table with id (UUID), username (unique), and password fields. Schema is located in `shared/schema.ts` and uses Drizzle's table definition API with Zod integration for validation.
+**Database Schema**: Located in `shared/schema.ts`, the schema includes:
+- `users` - User accounts (id, username, password)
+- `leads` - Lead capture (email, type, wizard state)
+- `toolClicks` - Referral tracking (tool ID, session, URL)
+- `toolSources` - Data sources for tools (Manual, TAAFT API, ProductHunt, etc.)
+- `toolCategories` - 15 categories with slugs, names, icons
+- `aiTools` - Main AI tools database (155+ tools with trust scores, pricing models, features)
+- `pendingTools` - Staging area for tools awaiting admin review
+- `toolUpdatesLog` - Audit trail for all changes
+- `adminUsers` - Admin dashboard access
 
 **Database Provider**: Neon Database serverless driver (@neondatabase/serverless) enables serverless PostgreSQL connections.
 
 **Migrations**: Drizzle Kit manages database migrations with output directory `./migrations` and schema source `./shared/schema.ts`.
 
-**Tool Data**: AI tools are currently stored as static data in `client/src/lib/tools.ts` as an array of `AITool` objects. Each tool includes metadata like name, description, category, features, URL, keywords, pricing, target user (SMB/individual/both), and NSFW flags. This approach supports rapid development but could be migrated to database storage for dynamic management.
+**AI Tools Management System**: A hybrid database-driven system supporting:
+- **155+ curated AI tools** across 15 categories seeded from initial research
+- **Trust scoring** (0.00-1.00) to maintain quality of recommendations
+- **Pending tools workflow** for reviewing newly discovered tools before publishing
+- **Source tracking** to identify where tool data originates (manual entry, external APIs)
+- **Audit logging** for all tool changes
+- Ready for integration with external feeds (There's An AI For That API, ProductHunt)
 
 ### Authentication and Authorization
 

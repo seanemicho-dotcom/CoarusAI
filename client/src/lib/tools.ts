@@ -6,454 +6,654 @@ export interface AITool {
   features: string[];
   url: string;
   keywords: string[];
+  pricing: string;
+  fitScore?: number;
+  targetUser: "smb" | "individual" | "both";
+  isNsfw?: boolean;
+  nsfwLevel?: "partial" | "yes" | "no";
 }
 
 export const aiTools: AITool[] = [
-  // Bookkeeping
+  // Customer Support
   {
-    id: "quickbooks",
-    name: "QuickBooks Online",
-    description: "Cloud-based accounting software with AI-powered categorization, receipt scanning, and financial insights for small businesses.",
-    category: "bookkeeping",
-    features: ["Auto-categorization", "Receipt capture", "Invoicing", "Tax prep"],
-    url: "https://quickbooks.intuit.com",
-    keywords: ["bookkeeping", "accounting", "invoicing", "taxes", "finance"]
+    id: "tidio",
+    name: "Tidio",
+    description: "AI chatbot platform for websites with live chat, visitor tracking, and automated responses for small businesses.",
+    category: "customer-support",
+    features: ["AI chatbots", "Live chat", "Visitor tracking", "Email integration"],
+    url: "https://www.tidio.com",
+    keywords: ["customer service", "chat", "chatbot", "support", "website"],
+    pricing: "$29/mo",
+    targetUser: "smb",
   },
-  {
-    id: "xero",
-    name: "Xero",
-    description: "Cloud accounting with AI-driven bank reconciliation, expense tracking, and financial reporting for growing businesses.",
-    category: "bookkeeping",
-    features: ["Bank feeds", "Smart reconciliation", "Multi-currency", "Payroll"],
-    url: "https://www.xero.com",
-    keywords: ["bookkeeping", "accounting", "invoicing", "finance", "payroll"]
-  },
-  {
-    id: "wave",
-    name: "Wave Accounting",
-    description: "Free accounting software for small businesses with automated invoicing, receipt scanning, and financial reports.",
-    category: "bookkeeping",
-    features: ["Free accounting", "Invoicing", "Receipt scanning", "Financial reports"],
-    url: "https://www.waveapps.com",
-    keywords: ["bookkeeping", "accounting", "invoicing", "free", "small business"]
-  },
-  {
-    id: "zoho-books",
-    name: "Zoho Books",
-    description: "Online accounting software with automated workflows, bank feeds, and inventory management for small businesses.",
-    category: "bookkeeping",
-    features: ["Automated workflows", "Bank feeds", "Inventory", "Time tracking"],
-    url: "https://www.zoho.com/books",
-    keywords: ["bookkeeping", "accounting", "invoicing", "inventory"]
-  },
-  // Invoicing
-  {
-    id: "freshbooks",
-    name: "FreshBooks",
-    description: "Invoicing and accounting software built for small business owners with automatic payment reminders and expense tracking.",
-    category: "invoicing",
-    features: ["Professional invoices", "Auto reminders", "Time tracking", "Expenses"],
-    url: "https://www.freshbooks.com",
-    keywords: ["invoicing", "billing", "accounting", "payments"]
-  },
-  {
-    id: "zoho-invoice",
-    name: "Zoho Invoice",
-    description: "Free online invoicing software with automated payment reminders, time tracking, and multi-currency support.",
-    category: "invoicing",
-    features: ["Free invoicing", "Payment reminders", "Time tracking", "Multi-currency"],
-    url: "https://www.zoho.com/invoice",
-    keywords: ["invoicing", "billing", "free", "payments"]
-  },
-  {
-    id: "invoice-ninja",
-    name: "Invoice Ninja",
-    description: "Open-source invoicing platform with proposals, recurring invoices, and auto-billing for freelancers and businesses.",
-    category: "invoicing",
-    features: ["Recurring invoices", "Proposals", "Auto-billing", "Open source"],
-    url: "https://www.invoiceninja.com",
-    keywords: ["invoicing", "billing", "freelancer", "proposals"]
-  },
-  {
-    id: "square-invoices",
-    name: "Square Invoices",
-    description: "Free invoicing tool that lets you send invoices, track payments, and accept card payments from anywhere.",
-    category: "invoicing",
-    features: ["Free to send", "Card payments", "Payment tracking", "Mobile app"],
-    url: "https://squareup.com/invoices",
-    keywords: ["invoicing", "billing", "payments", "mobile"]
-  },
-  // Marketing
-  {
-    id: "jasper",
-    name: "Jasper AI",
-    description: "AI copywriting assistant that helps create marketing content, blog posts, social media copy, and ads in seconds.",
-    category: "marketing",
-    features: ["AI copywriting", "50+ templates", "Brand voice", "SEO optimization"],
-    url: "https://www.jasper.ai",
-    keywords: ["marketing", "content", "copywriting", "social media", "ads", "blog", "seo"]
-  },
-  {
-    id: "copyai",
-    name: "Copy.ai",
-    description: "AI-powered writing tool for creating marketing copy, emails, social posts, and product descriptions instantly.",
-    category: "marketing",
-    features: ["90+ templates", "Multiple languages", "Team collaboration", "Brand voice"],
-    url: "https://www.copy.ai",
-    keywords: ["marketing", "content", "copywriting", "email", "social media"]
-  },
-  {
-    id: "writesonic",
-    name: "Writesonic",
-    description: "AI writing platform for creating SEO-optimized content, ads, landing pages, and product descriptions.",
-    category: "marketing",
-    features: ["SEO content", "Landing pages", "Ad copy", "Article writer"],
-    url: "https://writesonic.com",
-    keywords: ["marketing", "content", "seo", "ads", "landing pages"]
-  },
-  {
-    id: "canva",
-    name: "Canva (Magic Design)",
-    description: "Design platform with AI-powered Magic Design for creating graphics, presentations, and marketing materials easily.",
-    category: "marketing",
-    features: ["Magic Design AI", "Brand kit", "Templates", "Video editing"],
-    url: "https://www.canva.com",
-    keywords: ["marketing", "design", "graphics", "social media", "presentations"]
-  },
-  // Social Media
-  {
-    id: "buffer",
-    name: "Buffer",
-    description: "Social media management platform with AI-powered scheduling, analytics, and content suggestions for all platforms.",
-    category: "social media",
-    features: ["Auto-scheduling", "AI content ideas", "Analytics", "Multi-platform"],
-    url: "https://buffer.com",
-    keywords: ["social media", "marketing", "scheduling", "instagram", "twitter", "facebook"]
-  },
-  {
-    id: "hootsuite",
-    name: "Hootsuite",
-    description: "Social media management tool for scheduling posts, monitoring mentions, and analyzing performance across networks.",
-    category: "social media",
-    features: ["Bulk scheduling", "Social listening", "Team collaboration", "Analytics"],
-    url: "https://www.hootsuite.com",
-    keywords: ["social media", "marketing", "scheduling", "monitoring", "analytics"]
-  },
-  {
-    id: "later",
-    name: "Later",
-    description: "Visual social media planner for Instagram, TikTok, and Pinterest with drag-and-drop calendar and analytics.",
-    category: "social media",
-    features: ["Visual planner", "Link in bio", "Best time to post", "User-generated content"],
-    url: "https://later.com",
-    keywords: ["social media", "instagram", "tiktok", "pinterest", "scheduling"]
-  },
-  {
-    id: "metricool",
-    name: "Metricool",
-    description: "All-in-one social media tool for planning, analyzing, and growing your presence across all major platforms.",
-    category: "social media",
-    features: ["Content planner", "Competitor analysis", "Reports", "Ad management"],
-    url: "https://metricool.com",
-    keywords: ["social media", "analytics", "scheduling", "competitors"]
-  },
-  // Customer Service
   {
     id: "freshdesk",
     name: "Freshdesk",
-    description: "Cloud-based customer support with AI-powered automation, self-service portal, and team collaboration tools.",
-    category: "customer service",
+    description: "Cloud-based customer support with AI-powered automation, self-service portal, and team collaboration.",
+    category: "customer-support",
     features: ["Freddy AI", "Auto-assign", "Knowledge base", "Team inbox"],
     url: "https://freshdesk.com",
-    keywords: ["customer service", "support", "tickets", "automation", "help desk"]
+    keywords: ["customer service", "support", "tickets", "automation", "help desk"],
+    pricing: "$18+/mo",
+    targetUser: "smb",
   },
   {
     id: "zendesk",
     name: "Zendesk",
     description: "Customer service platform with AI-powered ticket routing, suggested replies, and omnichannel support.",
-    category: "customer service",
+    category: "customer-support",
     features: ["AI ticket routing", "Answer bot", "Analytics", "Omnichannel"],
     url: "https://www.zendesk.com",
-    keywords: ["customer service", "support", "tickets", "help desk", "crm"]
-  },
-  {
-    id: "tidio",
-    name: "Tidio",
-    description: "Live chat and chatbot platform for websites with AI-powered responses and visitor tracking for small businesses.",
-    category: "customer service",
-    features: ["Live chat", "AI chatbots", "Visitor tracking", "Email integration"],
-    url: "https://www.tidio.com",
-    keywords: ["customer service", "chat", "chatbot", "live chat", "website"]
+    keywords: ["customer service", "support", "tickets", "help desk", "crm"],
+    pricing: "$19+/agent/mo",
+    targetUser: "smb",
   },
   {
     id: "intercom",
     name: "Intercom",
-    description: "AI-powered customer messaging platform for support, engagement, and conversational bots across all channels.",
-    category: "customer service",
+    description: "AI-powered customer messaging platform for support, engagement, and conversational bots.",
+    category: "customer-support",
     features: ["AI chatbots", "Live chat", "Help center", "Proactive support"],
     url: "https://www.intercom.com",
-    keywords: ["customer service", "support", "chat", "chatbot", "help desk"]
+    keywords: ["customer service", "support", "chat", "chatbot", "help desk"],
+    pricing: "$74+/mo",
+    targetUser: "smb",
   },
-  // Sales CRM
+  // Sales & CRM
+  {
+    id: "freshsales",
+    name: "Freshsales AI",
+    description: "CRM with AI-powered lead scoring, auto-followup, and sales forecasting for growing teams.",
+    category: "sales-crm",
+    features: ["AI lead scoring", "Auto-followup", "Pipeline insights", "Forecasting"],
+    url: "https://www.freshworks.com/crm/sales",
+    keywords: ["crm", "sales", "leads", "automation", "forecasting"],
+    pricing: "$15-69/mo",
+    targetUser: "smb",
+  },
   {
     id: "hubspot",
     name: "HubSpot CRM",
-    description: "Free CRM with AI-powered lead scoring, email tracking, and sales automation tools for growing teams.",
-    category: "sales crm",
+    description: "Free CRM with AI-powered lead scoring, email tracking, and sales automation tools.",
+    category: "sales-crm",
     features: ["AI lead scoring", "Email tracking", "Pipeline management", "Free tier"],
     url: "https://www.hubspot.com/crm",
-    keywords: ["crm", "sales", "leads", "marketing", "automation"]
+    keywords: ["crm", "sales", "leads", "marketing", "automation"],
+    pricing: "Free - $50+/mo",
+    targetUser: "smb",
   },
   {
     id: "pipedrive",
     name: "Pipedrive",
-    description: "Sales CRM with AI sales assistant for deal insights, activity suggestions, and visual pipeline management.",
-    category: "sales crm",
+    description: "Sales CRM with AI sales assistant for deal insights, activity suggestions, and visual pipeline.",
+    category: "sales-crm",
     features: ["AI assistant", "Visual pipeline", "Lead scoring", "Email integration"],
     url: "https://www.pipedrive.com",
-    keywords: ["crm", "sales", "pipeline", "deals", "small business"]
+    keywords: ["crm", "sales", "pipeline", "deals", "small business"],
+    pricing: "$14+/user/mo",
+    targetUser: "smb",
   },
   {
     id: "zoho-crm",
     name: "Zoho CRM",
-    description: "CRM software with Zia AI for predictions, lead scoring, and workflow automation for sales teams.",
-    category: "sales crm",
+    description: "CRM software with Zia AI for predictions, lead scoring, and workflow automation.",
+    category: "sales-crm",
     features: ["Zia AI", "Lead scoring", "Workflow automation", "Multichannel"],
     url: "https://www.zoho.com/crm",
-    keywords: ["crm", "sales", "leads", "automation", "ai"]
+    keywords: ["crm", "sales", "leads", "automation", "ai"],
+    pricing: "$14+/user/mo",
+    targetUser: "smb",
   },
   {
     id: "close-crm",
     name: "Close CRM",
-    description: "CRM built for sales teams with built-in calling, email sequences, and pipeline automation features.",
-    category: "sales crm",
+    description: "CRM built for sales teams with built-in calling, email sequences, and pipeline automation.",
+    category: "sales-crm",
     features: ["Built-in calling", "Email sequences", "Pipeline automation", "Reporting"],
     url: "https://www.close.com",
-    keywords: ["crm", "sales", "calling", "email", "pipeline"]
+    keywords: ["crm", "sales", "calling", "email", "pipeline"],
+    pricing: "$29+/user/mo",
+    targetUser: "smb",
   },
-  // Productivity
+  // Marketing & SEO
+  {
+    id: "jasper",
+    name: "Jasper AI",
+    description: "AI copywriting assistant for marketing content, blog posts, social media copy, and ads.",
+    category: "marketing-seo",
+    features: ["AI copywriting", "50+ templates", "Brand voice", "SEO optimization"],
+    url: "https://www.jasper.ai",
+    keywords: ["marketing", "content", "copywriting", "social media", "ads", "blog", "seo"],
+    pricing: "$39+/mo",
+    targetUser: "both",
+  },
+  {
+    id: "surfer-seo",
+    name: "Surfer SEO",
+    description: "AI-powered SEO tool for content optimization, keyword research, and ranking analysis.",
+    category: "marketing-seo",
+    features: ["Content optimizer", "Keyword research", "SERP analyzer", "AI writing"],
+    url: "https://surferseo.com",
+    keywords: ["seo", "content", "keywords", "ranking", "optimization"],
+    pricing: "$59+/mo",
+    targetUser: "both",
+  },
+  {
+    id: "copyai",
+    name: "Copy.ai",
+    description: "AI-powered writing tool for marketing copy, emails, social posts, and product descriptions.",
+    category: "marketing-seo",
+    features: ["90+ templates", "Multiple languages", "Team collaboration", "Brand voice"],
+    url: "https://www.copy.ai",
+    keywords: ["marketing", "content", "copywriting", "email", "social media"],
+    pricing: "$36+/mo",
+    targetUser: "both",
+  },
+  {
+    id: "writesonic",
+    name: "Writesonic",
+    description: "AI writing platform for SEO-optimized content, ads, landing pages, and product descriptions.",
+    category: "marketing-seo",
+    features: ["SEO content", "Landing pages", "Ad copy", "Article writer"],
+    url: "https://writesonic.com",
+    keywords: ["marketing", "content", "seo", "ads", "landing pages"],
+    pricing: "$19+/mo",
+    targetUser: "both",
+  },
+  {
+    id: "canva",
+    name: "Canva Magic Design",
+    description: "Design platform with AI-powered Magic Design for graphics, presentations, and marketing materials.",
+    category: "marketing-seo",
+    features: ["Magic Design AI", "Brand kit", "Templates", "Video editing"],
+    url: "https://www.canva.com",
+    keywords: ["marketing", "design", "graphics", "social media", "presentations"],
+    pricing: "Free - $12.99/mo",
+    targetUser: "both",
+  },
+  // Social Media
+  {
+    id: "buffer",
+    name: "Buffer",
+    description: "Social media management with AI-powered scheduling, analytics, and content suggestions.",
+    category: "social-media",
+    features: ["Auto-scheduling", "AI content ideas", "Analytics", "Multi-platform"],
+    url: "https://buffer.com",
+    keywords: ["social media", "marketing", "scheduling", "instagram", "twitter"],
+    pricing: "$6+/channel/mo",
+    targetUser: "both",
+  },
+  {
+    id: "hootsuite",
+    name: "Hootsuite",
+    description: "Social media management for scheduling posts, monitoring mentions, and analyzing performance.",
+    category: "social-media",
+    features: ["Bulk scheduling", "Social listening", "Team collaboration", "Analytics"],
+    url: "https://www.hootsuite.com",
+    keywords: ["social media", "marketing", "scheduling", "monitoring"],
+    pricing: "$99+/mo",
+    targetUser: "smb",
+  },
+  {
+    id: "later",
+    name: "Later",
+    description: "Visual social media planner for Instagram, TikTok, and Pinterest with drag-and-drop calendar.",
+    category: "social-media",
+    features: ["Visual planner", "Link in bio", "Best time to post", "Analytics"],
+    url: "https://later.com",
+    keywords: ["social media", "instagram", "tiktok", "pinterest", "scheduling"],
+    pricing: "$18+/mo",
+    targetUser: "both",
+  },
+  {
+    id: "metricool",
+    name: "Metricool",
+    description: "All-in-one social media tool for planning, analyzing, and growing your presence.",
+    category: "social-media",
+    features: ["Content planner", "Competitor analysis", "Reports", "Ad management"],
+    url: "https://metricool.com",
+    keywords: ["social media", "analytics", "scheduling", "competitors"],
+    pricing: "$18+/mo",
+    targetUser: "both",
+  },
+  // Finance & Accounting
+  {
+    id: "quickbooks",
+    name: "QuickBooks Online",
+    description: "Cloud-based accounting with AI-powered categorization, receipt scanning, and financial insights.",
+    category: "finance",
+    features: ["Auto-categorization", "Receipt capture", "Invoicing", "Tax prep"],
+    url: "https://quickbooks.intuit.com",
+    keywords: ["bookkeeping", "accounting", "invoicing", "taxes", "finance"],
+    pricing: "$30+/mo",
+    targetUser: "smb",
+  },
+  {
+    id: "xero",
+    name: "Xero",
+    description: "Cloud accounting with AI-driven bank reconciliation, expense tracking, and financial reporting.",
+    category: "finance",
+    features: ["Bank feeds", "Smart reconciliation", "Multi-currency", "Payroll"],
+    url: "https://www.xero.com",
+    keywords: ["bookkeeping", "accounting", "invoicing", "finance", "payroll"],
+    pricing: "$13+/mo",
+    targetUser: "smb",
+  },
+  {
+    id: "freshbooks",
+    name: "FreshBooks",
+    description: "Invoicing and accounting software with automatic payment reminders and expense tracking.",
+    category: "finance",
+    features: ["Professional invoices", "Auto reminders", "Time tracking", "Expenses"],
+    url: "https://www.freshbooks.com",
+    keywords: ["invoicing", "billing", "accounting", "payments"],
+    pricing: "$17+/mo",
+    targetUser: "smb",
+  },
+  {
+    id: "zoho-books",
+    name: "Zoho Books",
+    description: "Online accounting software with automated workflows, bank feeds, and inventory management.",
+    category: "finance",
+    features: ["Automated workflows", "Bank feeds", "Inventory", "Time tracking"],
+    url: "https://www.zoho.com/books",
+    keywords: ["bookkeeping", "accounting", "invoicing", "inventory"],
+    pricing: "$15+/mo",
+    targetUser: "smb",
+  },
+  // HR & Hiring
+  {
+    id: "workday",
+    name: "Workday",
+    description: "Enterprise HR platform with AI-powered talent management, analytics, and automation.",
+    category: "hr-hiring",
+    features: ["AI analytics", "Talent management", "Payroll", "Learning"],
+    url: "https://www.workday.com",
+    keywords: ["hr", "hiring", "payroll", "talent", "enterprise"],
+    pricing: "Custom",
+    targetUser: "smb",
+  },
+  {
+    id: "bamboohr",
+    name: "BambooHR",
+    description: "HR software for small to medium businesses with hiring, onboarding, and performance tools.",
+    category: "hr-hiring",
+    features: ["Applicant tracking", "Onboarding", "Time tracking", "Performance"],
+    url: "https://www.bamboohr.com",
+    keywords: ["hr", "hiring", "onboarding", "performance"],
+    pricing: "$6+/employee/mo",
+    targetUser: "smb",
+  },
+  // Productivity (Individual)
   {
     id: "notion",
-    name: "Notion",
-    description: "All-in-one workspace with AI writing assistant, databases, wikis, and project tracking for teams.",
+    name: "Notion AI",
+    description: "All-in-one workspace with AI writing assistant, databases, wikis, and project tracking.",
     category: "productivity",
     features: ["Notion AI", "Databases", "Wiki", "Project tracking"],
     url: "https://www.notion.so",
-    keywords: ["productivity", "notes", "wiki", "project management", "ai writing"]
+    keywords: ["productivity", "notes", "wiki", "project management", "ai writing"],
+    pricing: "Free - $10/mo",
+    targetUser: "both",
   },
   {
     id: "todoist",
     name: "Todoist",
-    description: "Task management app with natural language input, recurring tasks, and smart scheduling for personal productivity.",
+    description: "Task management app with natural language input, recurring tasks, and smart scheduling.",
     category: "productivity",
     features: ["Natural language", "Recurring tasks", "Labels & filters", "Integrations"],
     url: "https://todoist.com",
-    keywords: ["productivity", "tasks", "to-do", "personal", "organization"]
-  },
-  {
-    id: "microsoft-todo",
-    name: "Microsoft To Do",
-    description: "Simple task management app integrated with Microsoft 365 with smart suggestions and My Day planning.",
-    category: "productivity",
-    features: ["My Day", "Smart suggestions", "Microsoft 365", "Shared lists"],
-    url: "https://todo.microsoft.com",
-    keywords: ["productivity", "tasks", "to-do", "microsoft", "free"]
-  },
-  {
-    id: "google-tasks",
-    name: "Google Tasks",
-    description: "Simple task manager integrated with Gmail and Google Calendar for managing to-dos alongside your schedule.",
-    category: "productivity",
-    features: ["Gmail integration", "Calendar sync", "Subtasks", "Mobile app"],
-    url: "https://support.google.com/tasks",
-    keywords: ["productivity", "tasks", "to-do", "google", "free"]
-  },
-  // Project Management
-  {
-    id: "trello",
-    name: "Trello",
-    description: "Visual project management with Kanban boards, Butler automation, and Power-Ups for team collaboration.",
-    category: "project management",
-    features: ["Kanban boards", "Butler automation", "Power-Ups", "Templates"],
-    url: "https://trello.com",
-    keywords: ["project management", "kanban", "boards", "tasks", "visual"]
-  },
-  {
-    id: "asana",
-    name: "Asana",
-    description: "Project management with AI-powered task prioritization, timeline views, and workflow automation for teams.",
-    category: "project management",
-    features: ["AI prioritization", "Timeline view", "Goals tracking", "Workload"],
-    url: "https://asana.com",
-    keywords: ["project management", "tasks", "team", "collaboration", "goals"]
+    keywords: ["productivity", "tasks", "to-do", "personal", "organization"],
+    pricing: "Free - $4/mo",
+    targetUser: "individual",
   },
   {
     id: "clickup",
     name: "ClickUp",
-    description: "All-in-one project management with AI task creation, docs, time tracking, and customizable workflows.",
-    category: "project management",
+    description: "All-in-one project management with AI task creation, docs, time tracking, and workflows.",
+    category: "productivity",
     features: ["ClickUp AI", "Custom views", "Docs", "Time tracking"],
     url: "https://clickup.com",
-    keywords: ["project management", "tasks", "team", "collaboration", "docs"]
+    keywords: ["project management", "tasks", "team", "collaboration"],
+    pricing: "Free - $7/mo",
+    targetUser: "both",
   },
-  {
-    id: "monday",
-    name: "Monday.com",
-    description: "Work OS with AI-powered project tracking, automation, and team collaboration for any workflow.",
-    category: "project management",
-    features: ["AI automations", "Visual boards", "Time tracking", "Integrations"],
-    url: "https://monday.com",
-    keywords: ["project management", "tasks", "team", "collaboration", "workflow"]
-  },
-  // Writing
+  // Writing & Content (Individual)
   {
     id: "grammarly",
     name: "Grammarly",
-    description: "AI writing assistant for grammar, clarity, tone, and style improvements across all your content.",
+    description: "AI writing assistant for grammar, clarity, tone, and style improvements across all content.",
     category: "writing",
     features: ["Grammar check", "Tone detection", "Plagiarism", "Style guide"],
     url: "https://www.grammarly.com",
-    keywords: ["writing", "grammar", "productivity", "communication", "email"]
+    keywords: ["writing", "grammar", "productivity", "communication", "email"],
+    pricing: "Free - $12/mo",
+    targetUser: "individual",
   },
   {
     id: "quillbot",
     name: "Quillbot",
-    description: "AI paraphrasing and writing tool for rewording, summarizing, and improving your text instantly.",
+    description: "AI paraphrasing and writing tool for rewording, summarizing, and improving text.",
     category: "writing",
     features: ["Paraphraser", "Summarizer", "Grammar checker", "Citation generator"],
     url: "https://quillbot.com",
-    keywords: ["writing", "paraphrase", "summarize", "grammar", "academic"]
+    keywords: ["writing", "paraphrase", "summarize", "grammar", "academic"],
+    pricing: "Free - $9.95/mo",
+    targetUser: "individual",
   },
   {
     id: "notion-ai",
     name: "Notion AI",
-    description: "AI writing assistant built into Notion for drafting, editing, summarizing, and brainstorming content.",
+    description: "AI writing assistant built into Notion for drafting, editing, summarizing, and brainstorming.",
     category: "writing",
     features: ["AI drafting", "Summarization", "Translation", "Brainstorming"],
     url: "https://www.notion.so/product/ai",
-    keywords: ["writing", "ai", "drafting", "notes", "productivity"]
+    keywords: ["writing", "ai", "drafting", "notes", "productivity"],
+    pricing: "$10/mo add-on",
+    targetUser: "individual",
   },
-  {
-    id: "jasper-docs",
-    name: "Jasper Documents",
-    description: "AI-powered document editor for creating long-form content, blogs, and articles with your brand voice.",
-    category: "writing",
-    features: ["Long-form content", "Brand voice", "SEO mode", "Collaboration"],
-    url: "https://www.jasper.ai",
-    keywords: ["writing", "content", "blog", "articles", "ai"]
-  },
-  // Education
+  // Learning & Education (Individual)
   {
     id: "khan-academy",
     name: "Khan Academy",
-    description: "Free educational platform with AI tutor Khanmigo for personalized learning in math, science, and more.",
+    description: "Free educational platform with AI tutor Khanmigo for personalized learning.",
     category: "education",
     features: ["Khanmigo AI tutor", "Free courses", "Progress tracking", "All subjects"],
     url: "https://www.khanacademy.org",
-    keywords: ["education", "learning", "courses", "free", "tutoring"]
-  },
-  {
-    id: "quizlet",
-    name: "Quizlet",
-    description: "Learning platform with AI-powered flashcards, practice tests, and study games for any subject.",
-    category: "education",
-    features: ["AI flashcards", "Practice tests", "Study games", "Learn mode"],
-    url: "https://quizlet.com",
-    keywords: ["education", "learning", "flashcards", "studying", "memory"]
+    keywords: ["education", "learning", "courses", "free", "tutoring"],
+    pricing: "Free",
+    targetUser: "individual",
   },
   {
     id: "coursera",
     name: "Coursera",
-    description: "Online learning platform with AI-powered skill assessments and courses from top universities worldwide.",
+    description: "Online learning platform with AI-powered skill assessments and courses from top universities.",
     category: "education",
     features: ["University courses", "Certificates", "Skill assessments", "Career paths"],
     url: "https://www.coursera.org",
-    keywords: ["education", "courses", "university", "skills", "certificates"]
+    keywords: ["education", "courses", "university", "skills", "certificates"],
+    pricing: "$49+/mo",
+    targetUser: "individual",
   },
   {
     id: "duolingo",
     name: "Duolingo",
-    description: "Language learning app with AI-powered personalization, bite-sized lessons, and gamified progress tracking.",
+    description: "Language learning app with AI-powered personalization and gamified progress tracking.",
     category: "education",
     features: ["AI personalization", "40+ languages", "Gamification", "Progress tracking"],
     url: "https://www.duolingo.com",
-    keywords: ["education", "language", "learning", "free", "app"]
-  }
+    keywords: ["education", "language", "learning", "free", "app"],
+    pricing: "Free - $6.99/mo",
+    targetUser: "individual",
+  },
+  // Personal Finance (Individual)
+  {
+    id: "ynab",
+    name: "YNAB",
+    description: "Budgeting app that helps you give every dollar a job and break the paycheck cycle.",
+    category: "personal-finance",
+    features: ["Zero-based budgeting", "Goal tracking", "Bank sync", "Reports"],
+    url: "https://www.ynab.com",
+    keywords: ["finance", "budgeting", "personal", "money", "saving"],
+    pricing: "$14.99/mo",
+    targetUser: "individual",
+  },
+  {
+    id: "mint",
+    name: "Mint",
+    description: "Free personal finance app for budgeting, bill tracking, and credit score monitoring.",
+    category: "personal-finance",
+    features: ["Auto-categorization", "Bill reminders", "Credit score", "Insights"],
+    url: "https://mint.intuit.com",
+    keywords: ["finance", "budgeting", "personal", "free", "tracking"],
+    pricing: "Free",
+    targetUser: "individual",
+  },
+  // Companion / Emotional Support
+  {
+    id: "replika",
+    name: "Replika",
+    description: "AI companion for emotional support, conversation, and romantic simulation.",
+    category: "companion",
+    features: ["Emotional support", "Conversation", "Customizable personality", "Memory"],
+    url: "https://replika.com",
+    keywords: ["companion", "emotional", "chat", "ai friend", "support"],
+    pricing: "Free - $19.99/mo",
+    targetUser: "individual",
+    isNsfw: false,
+    nsfwLevel: "partial",
+  },
+  {
+    id: "paradot",
+    name: "Paradot",
+    description: "Social AI companion focused on emotional bonding and meaningful conversations.",
+    category: "companion",
+    features: ["Emotional bonding", "Personality development", "Memory", "Conversations"],
+    url: "https://www.paradot.ai",
+    keywords: ["companion", "emotional", "social", "bonding", "chat"],
+    pricing: "Free",
+    targetUser: "individual",
+    isNsfw: false,
+    nsfwLevel: "no",
+  },
+  {
+    id: "character-ai",
+    name: "Character.AI",
+    description: "Create and chat with AI characters for roleplay, entertainment, and creative interactions.",
+    category: "companion",
+    features: ["Custom characters", "Roleplay", "Creative conversations", "Persona RP"],
+    url: "https://character.ai",
+    keywords: ["roleplay", "characters", "chat", "creative", "entertainment"],
+    pricing: "Free - $9.99/mo",
+    targetUser: "individual",
+    isNsfw: false,
+    nsfwLevel: "no",
+  },
+  // Adult / NSFW Companion (18+)
+  {
+    id: "kindroid",
+    name: "Kindroid",
+    description: "Customizable AI companion with romantic and intimate conversation options for adults.",
+    category: "adult-companion",
+    features: ["Customizable AI", "Voice messages", "Intimate conversations", "Memory"],
+    url: "https://kindroid.ai",
+    keywords: ["adult", "romantic", "companion", "intimate", "18+"],
+    pricing: "$13.99/mo",
+    targetUser: "individual",
+    isNsfw: true,
+    nsfwLevel: "yes",
+  },
+  {
+    id: "crushon",
+    name: "CrushOn.AI",
+    description: "AI roleplay platform for unfiltered romantic and adult fantasy interactions.",
+    category: "adult-companion",
+    features: ["NSFW roleplay", "Custom characters", "Unfiltered chat", "Scenarios"],
+    url: "https://crushon.ai",
+    keywords: ["adult", "nsfw", "roleplay", "fantasy", "18+"],
+    pricing: "$9.99+/mo",
+    targetUser: "individual",
+    isNsfw: true,
+    nsfwLevel: "yes",
+  },
+  {
+    id: "janitor-ai",
+    name: "Janitor AI",
+    description: "Character-based AI chat platform supporting NSFW content and creative roleplay.",
+    category: "adult-companion",
+    features: ["Character creation", "NSFW support", "API integration", "Community"],
+    url: "https://janitorai.com",
+    keywords: ["adult", "nsfw", "roleplay", "characters", "18+"],
+    pricing: "Free - Premium",
+    targetUser: "individual",
+    isNsfw: true,
+    nsfwLevel: "yes",
+  },
+  {
+    id: "chai-ai",
+    name: "Chai AI",
+    description: "AI chat platform with diverse characters including romantic and adult-oriented bots.",
+    category: "adult-companion",
+    features: ["Many characters", "Romantic options", "Mobile app", "Premium content"],
+    url: "https://chai.ml",
+    keywords: ["chat", "companion", "romantic", "mobile", "ai"],
+    pricing: "Free - $13.99/mo",
+    targetUser: "individual",
+    isNsfw: true,
+    nsfwLevel: "partial",
+  },
 ];
 
 export const categories = [
-  { slug: "bookkeeping", name: "Bookkeeping", icon: "Calculator" },
-  { slug: "invoicing", name: "Invoicing", icon: "Receipt" },
-  { slug: "marketing", name: "Marketing", icon: "Megaphone" },
-  { slug: "social media", name: "Social Media", icon: "Share2" },
-  { slug: "customer service", name: "Customer Service", icon: "HeadphonesIcon" },
-  { slug: "sales crm", name: "Sales CRM", icon: "Users" },
-  { slug: "productivity", name: "Productivity", icon: "Zap" },
-  { slug: "project management", name: "Project Management", icon: "FolderKanban" },
-  { slug: "writing", name: "Writing", icon: "PenLine" },
-  { slug: "education", name: "Education", icon: "GraduationCap" },
+  { slug: "customer-support", name: "Customer Support", icon: "HeadphonesIcon", targetUser: "smb" },
+  { slug: "sales-crm", name: "Sales & CRM", icon: "TrendingUp", targetUser: "smb" },
+  { slug: "marketing-seo", name: "Marketing & SEO", icon: "Megaphone", targetUser: "both" },
+  { slug: "social-media", name: "Social Media", icon: "Share2", targetUser: "both" },
+  { slug: "finance", name: "Finance & Accounting", icon: "Calculator", targetUser: "smb" },
+  { slug: "hr-hiring", name: "HR & Hiring", icon: "Users", targetUser: "smb" },
+  { slug: "productivity", name: "Productivity", icon: "Zap", targetUser: "both" },
+  { slug: "writing", name: "Writing & Content", icon: "PenLine", targetUser: "individual" },
+  { slug: "education", name: "Learning & Education", icon: "GraduationCap", targetUser: "individual" },
+  { slug: "personal-finance", name: "Personal Finance", icon: "Wallet", targetUser: "individual" },
+  { slug: "companion", name: "AI Companions", icon: "Heart", targetUser: "individual" },
+  { slug: "adult-companion", name: "Adult Companions (18+)", icon: "Flame", targetUser: "individual" },
 ];
 
-export function matchTools(userNeed: string): { category: string; tools: AITool[] } {
-  const needLower = userNeed.toLowerCase();
-  
-  // Score each tool based on keyword matches
-  const scoredTools = aiTools.map(tool => {
-    let score = 0;
-    tool.keywords.forEach(keyword => {
-      if (needLower.includes(keyword)) {
-        score += 2;
+export interface MatchResult {
+  category: string;
+  tools: AITool[];
+  fitScores: Map<string, number>;
+}
+
+export function matchToolsForBusiness(
+  problems: string[],
+  priorities: string[],
+  budget: string,
+  hoursPerWeek: number
+): MatchResult {
+  const categoryMapping: Record<string, string[]> = {
+    "customer-support": ["customer-support"],
+    "sales-crm": ["sales-crm"],
+    "marketing-seo": ["marketing-seo", "social-media"],
+    "email-messaging": ["marketing-seo"],
+    "dashboards": ["productivity", "sales-crm"],
+    "finance": ["finance"],
+    "knowledge-base": ["productivity"],
+    "hr-hiring": ["hr-hiring"],
+    "workflow": ["productivity"],
+  };
+
+  const relevantCategories = new Set<string>();
+  problems.forEach(problem => {
+    const cats = categoryMapping[problem] || [];
+    cats.forEach(c => relevantCategories.add(c));
+  });
+
+  const scoredTools = aiTools
+    .filter(tool => tool.targetUser === "smb" || tool.targetUser === "both")
+    .filter(tool => relevantCategories.has(tool.category))
+    .map(tool => {
+      let score = 60;
+      
+      // Problem match bonus
+      problems.forEach(problem => {
+        if (categoryMapping[problem]?.includes(tool.category)) {
+          score += 10;
+        }
+      });
+
+      // Priority bonus
+      if (priorities.includes("save-time") && tool.features.some(f => f.toLowerCase().includes("auto"))) {
+        score += 5;
       }
-    });
-    // Check category name
-    if (needLower.includes(tool.category.toLowerCase())) {
-      score += 3;
-    }
-    // Check tool name
-    if (needLower.includes(tool.name.toLowerCase())) {
-      score += 5;
-    }
-    // Check description words
-    const descWords = tool.description.toLowerCase().split(" ");
-    descWords.forEach(word => {
-      if (word.length > 4 && needLower.includes(word)) {
-        score += 1;
+      if (priorities.includes("reduce-cost") && tool.pricing.includes("Free")) {
+        score += 5;
       }
-    });
-    return { ...tool, score };
-  });
-  
-  // Sort by score and get top matches
-  const topTools = scoredTools
-    .filter(t => t.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 5);
-  
-  // Determine primary category
-  const categoryCounts: Record<string, number> = {};
-  topTools.forEach(tool => {
-    categoryCounts[tool.category] = (categoryCounts[tool.category] || 0) + tool.score;
-  });
-  
-  let primaryCategory = "productivity"; // default
-  let maxCount = 0;
-  Object.entries(categoryCounts).forEach(([cat, count]) => {
-    if (count > maxCount) {
-      maxCount = count;
-      primaryCategory = cat;
-    }
-  });
-  
-  // If no matches, return general productivity tools
-  if (topTools.length === 0) {
-    return {
-      category: "productivity",
-      tools: aiTools.filter(t => t.category === "productivity").slice(0, 4)
-    };
-  }
-  
+
+      // Hours bonus - more hours = more need
+      if (hoursPerWeek > 20) score += 5;
+      if (hoursPerWeek > 30) score += 5;
+
+      return { ...tool, fitScore: Math.min(score, 99) };
+    })
+    .sort((a, b) => (b.fitScore || 0) - (a.fitScore || 0))
+    .slice(0, 6);
+
+  const fitScores = new Map<string, number>();
+  scoredTools.forEach(t => fitScores.set(t.id, t.fitScore || 0));
+
+  const primaryCategory = scoredTools[0]?.category || "productivity";
+
   return {
     category: primaryCategory,
-    tools: topTools.map(({ score, ...tool }) => tool)
+    tools: scoredTools,
+    fitScores,
+  };
+}
+
+export function matchToolsForIndividual(
+  intents: string[],
+  goals: string[],
+  isAdultPath: boolean,
+  contentLevel: string
+): MatchResult {
+  const intentMapping: Record<string, string[]> = {
+    "productivity": ["productivity"],
+    "writing": ["writing"],
+    "learning": ["education"],
+    "career": ["writing", "productivity"],
+    "finance": ["personal-finance"],
+    "entertainment": ["companion"],
+    "companionship": ["companion"],
+    "adult": ["adult-companion", "companion"],
+  };
+
+  const relevantCategories = new Set<string>();
+  intents.forEach(intent => {
+    const cats = intentMapping[intent] || [];
+    cats.forEach(c => relevantCategories.add(c));
+  });
+
+  let filteredTools = aiTools
+    .filter(tool => tool.targetUser === "individual" || tool.targetUser === "both")
+    .filter(tool => relevantCategories.has(tool.category));
+
+  // Filter NSFW content based on settings
+  if (!isAdultPath || contentLevel === "companion-only") {
+    filteredTools = filteredTools.filter(tool => !tool.isNsfw);
+  } else if (contentLevel === "romantic") {
+    filteredTools = filteredTools.filter(tool => !tool.isNsfw || tool.nsfwLevel === "partial");
+  }
+
+  const scoredTools = filteredTools
+    .map(tool => {
+      let score = 70;
+      
+      intents.forEach(intent => {
+        if (intentMapping[intent]?.includes(tool.category)) {
+          score += 8;
+        }
+      });
+
+      goals.forEach(goal => {
+        if (tool.keywords.some(k => goal.toLowerCase().includes(k))) {
+          score += 5;
+        }
+      });
+
+      return { ...tool, fitScore: Math.min(score, 99) };
+    })
+    .sort((a, b) => (b.fitScore || 0) - (a.fitScore || 0))
+    .slice(0, 6);
+
+  const fitScores = new Map<string, number>();
+  scoredTools.forEach(t => fitScores.set(t.id, t.fitScore || 0));
+
+  const primaryCategory = scoredTools[0]?.category || "productivity";
+
+  return {
+    category: primaryCategory,
+    tools: scoredTools,
+    fitScores,
   };
 }

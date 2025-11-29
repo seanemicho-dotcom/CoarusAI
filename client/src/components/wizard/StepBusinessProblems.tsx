@@ -1,0 +1,67 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ArrowRight } from "lucide-react";
+import MultiSelectGrid from "./MultiSelectGrid";
+import { businessProblems } from "@/lib/wizard-data";
+import { useState } from "react";
+
+interface StepBusinessProblemsProps {
+  selected: string[];
+  onChange: (selected: string[]) => void;
+  onNext: () => void;
+  onBack: () => void;
+}
+
+export default function StepBusinessProblems({ selected, onChange, onNext, onBack }: StepBusinessProblemsProps) {
+  const [customWorkflow, setCustomWorkflow] = useState("");
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <h2 className="text-2xl md:text-3xl font-semibold mb-2" data-testid="text-step-title">
+        What do you want AI to help your business with?
+      </h2>
+      <p className="text-muted-foreground mb-6">
+        Choose all that apply.
+      </p>
+      
+      <MultiSelectGrid
+        options={businessProblems}
+        selected={selected}
+        onChange={onChange}
+        columns={2}
+      />
+      
+      <div className="mt-4">
+        <Input
+          placeholder="Custom workflow (optional)"
+          value={customWorkflow}
+          onChange={(e) => setCustomWorkflow(e.target.value)}
+          className="max-w-md"
+          data-testid="input-custom-workflow"
+        />
+      </div>
+      
+      <div className="flex justify-between mt-8">
+        <Button variant="outline" onClick={onBack} data-testid="button-back">
+          Back
+        </Button>
+        <div className="flex gap-3">
+          <Button 
+            variant="ghost" 
+            onClick={onNext}
+            data-testid="button-skip"
+          >
+            Skip
+          </Button>
+          <Button 
+            onClick={onNext} 
+            disabled={selected.length === 0}
+            data-testid="button-next"
+          >
+            Next <ArrowRight className="ml-2 w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}

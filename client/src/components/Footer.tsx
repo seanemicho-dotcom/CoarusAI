@@ -11,11 +11,11 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="font-semibold text-xl">Coarus AI</span>
+              <span className="font-semibold text-xl">COARUS AI</span>
             </div>
             <p className="text-muted-foreground max-w-sm">
-              Helping small and medium businesses find the perfect AI tools 
-              to transform their operations and boost productivity.
+              Helping businesses and individuals find the perfect AI tools 
+              to transform their work and boost productivity.
             </p>
           </div>
           
@@ -40,22 +40,22 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4">Categories</h4>
+            <h4 className="font-semibold mb-4">For Businesses</h4>
             <ul className="space-y-2">
-              <li><span className="text-muted-foreground">Marketing</span></li>
-              <li><span className="text-muted-foreground">Customer Service</span></li>
-              <li><span className="text-muted-foreground">Bookkeeping</span></li>
-              <li><span className="text-muted-foreground">Productivity</span></li>
+              <li><span className="text-muted-foreground">Customer Support AI</span></li>
+              <li><span className="text-muted-foreground">Sales & CRM</span></li>
+              <li><span className="text-muted-foreground">Marketing Automation</span></li>
+              <li><span className="text-muted-foreground">Finance & Accounting</span></li>
             </ul>
           </div>
         </div>
         
         <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground" data-testid="text-copyright">
-            © 2025 Coarus AI. All rights reserved.
+            © 2025 COARUS AI. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
-            Made with care for SMBs worldwide
+            Find the right AI solution — business or personal.
           </p>
         </div>
       </div>

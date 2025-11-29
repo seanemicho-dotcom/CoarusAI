@@ -1,9 +1,12 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
+import LanguageToggle from "./LanguageToggle";
+import { useState } from "react";
 
 export default function Header() {
   const [location] = useLocation();
+  const [currentLanguage, setCurrentLanguage] = useState("en");
   
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -13,34 +16,32 @@ export default function Header() {
             <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="font-semibold text-xl" data-testid="text-logo">Coarus AI</span>
+            <span className="font-semibold text-xl" data-testid="text-logo">COARUS AI</span>
           </div>
         </Link>
         
-        <nav className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-4">
+          <LanguageToggle 
+            currentLanguage={currentLanguage}
+            onLanguageChange={setCurrentLanguage}
+          />
+        </div>
+        
+        <nav className="flex items-center gap-4">
           <Link href="/">
             <span 
-              className={`text-sm cursor-pointer transition-colors ${location === "/" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              className={`text-sm cursor-pointer transition-colors hidden sm:inline ${location === "/" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               data-testid="link-nav-home"
             >
               Home
             </span>
           </Link>
           <Link href="/find-tools">
-            <span 
-              className={`text-sm cursor-pointer transition-colors ${location === "/find-tools" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
-              data-testid="link-nav-find-tools"
-            >
-              Find Tools
-            </span>
+            <Button data-testid="button-get-started">
+              Find AI Tools
+            </Button>
           </Link>
         </nav>
-        
-        <Link href="/find-tools">
-          <Button data-testid="button-get-started">
-            Get Started
-          </Button>
-        </Link>
       </div>
     </header>
   );

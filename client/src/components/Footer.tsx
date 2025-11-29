@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logoImage from "@assets/coarus-ai-logo_1764437976535.png";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -10,10 +11,11 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-2">
             <div className="flex items-center mb-4">
-              <span className="text-2xl font-bold tracking-tight">
-                <span className="text-primary">COARUS</span>
-                <span className="text-foreground ml-1">AI</span>
-              </span>
+              <img 
+                src={logoImage} 
+                alt="COARUS AI" 
+                className="h-8 w-auto"
+              />
             </div>
             <p className="text-muted-foreground max-w-sm">
               {t.footer.tagline}

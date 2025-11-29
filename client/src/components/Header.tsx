@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import LanguageToggle from "./LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logoImage from "@assets/coarus-ai-logo_1764437976535.png";
 
 export default function Header() {
   const [location] = useLocation();
@@ -12,10 +13,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 flex h-16 items-center justify-between gap-4">
         <Link href="/" data-testid="link-home">
           <div className="flex items-center cursor-pointer">
-            <span className="text-2xl md:text-3xl font-bold tracking-tight" data-testid="text-logo">
-              <span className="text-primary">COARUS</span>
-              <span className="text-foreground ml-1">AI</span>
-            </span>
+            <img 
+              src={logoImage} 
+              alt="COARUS AI" 
+              className="h-8 md:h-10 w-auto"
+              data-testid="img-logo"
+            />
           </div>
         </Link>
         

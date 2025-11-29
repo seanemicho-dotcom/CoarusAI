@@ -37,12 +37,16 @@ export default function EnhancedToolCard({
   language = "en"
 }: EnhancedToolCardProps) {
   
+  const outboundUrl = tool.affiliateUrl || tool.url;
+  const isAffiliateClick = !!tool.affiliateUrl;
+
   const trackClick = useMutation({
     mutationFn: async () => {
       return apiRequest("POST", "/api/tool-clicks", {
         toolId: tool.id,
         toolName: tool.name,
-        toolUrl: tool.url,
+        toolUrl: outboundUrl,
+        isAffiliate: isAffiliateClick,
         sessionId,
         userPath,
         language,
@@ -52,7 +56,7 @@ export default function EnhancedToolCard({
 
   const handleVisit = () => {
     trackClick.mutate();
-    window.open(tool.url, "_blank", "noopener,noreferrer");
+    window.open(outboundUrl, "_blank", "noopener,noreferrer");
   };
 
   const displayScore = fitScore || tool.fitScore || 0;

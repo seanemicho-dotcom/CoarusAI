@@ -5,6 +5,7 @@ export interface AITool {
   category: string;
   features: string[];
   url: string;
+  affiliateUrl?: string;
   keywords: string[];
   pricing: string;
   fitScore?: number;

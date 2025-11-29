@@ -13,20 +13,14 @@ export default function Hero() {
       
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center py-24">
         <p className="text-primary/90 font-medium mb-4 tracking-wide uppercase text-sm">
-          AI Tools for Everyone
+          {t.home.heroTagline}
         </p>
         
         <h1 
           className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white"
           data-testid="text-hero-headline"
         >
-          {t.home.heroTitle.split(' ').map((word, i) => 
-            ['AI', 'Tools', 'Perfect', 'You'].includes(word) ? (
-              <span key={i} className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">{word} </span>
-            ) : (
-              <span key={i}>{word} </span>
-            )
-          )}
+          {t.home.heroTitle}
         </h1>
         
         <p 
@@ -44,7 +38,7 @@ export default function Hero() {
           </Link>
           <Link href="/find-tools">
             <Button size="lg" variant="outline" className="text-lg px-8 border-slate-600 text-slate-200 hover:bg-slate-800 hover:text-white" data-testid="button-hero-explore">
-              <Search className="mr-2 w-5 h-5" /> Explore Categories
+              <Search className="mr-2 w-5 h-5" /> {t.home.exploreCategories}
             </Button>
           </Link>
         </div>
@@ -52,12 +46,12 @@ export default function Hero() {
         <div className="flex items-center justify-center gap-6 text-slate-400 text-sm flex-wrap">
           <div className="flex items-center gap-2">
             <Building2 className="w-4 h-4" />
-            <span>{t.wizard.pathSmb}</span>
+            <span>{t.home.forBusinesses}</span>
           </div>
           <div className="w-1 h-1 rounded-full bg-slate-600" />
           <div className="flex items-center gap-2">
             <User className="w-4 h-4" />
-            <span>{t.wizard.pathIndividual}</span>
+            <span>{t.home.forIndividuals}</span>
           </div>
         </div>
       </div>

@@ -1,27 +1,37 @@
-import { Check, Sparkles, Target, TrendingUp, Users, Building2, User } from "lucide-react";
+import { Check, Sparkles, Target, Building2, User } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ValueProposition() {
+  const { t } = useLanguage();
+
   const benefits = [
     {
       icon: Building2,
-      title: "For Businesses",
-      description: "Automate workflows, boost productivity, and scale operations with AI",
+      title: t.home.benefitBusiness,
+      description: t.home.benefitBusinessDesc,
     },
     {
       icon: User,
-      title: "For Individuals", 
-      description: "Personal AI assistants, learning tools, and creative companions",
+      title: t.home.benefitIndividual, 
+      description: t.home.benefitIndividualDesc,
     },
     {
       icon: Sparkles,
-      title: "Always Fresh",
-      description: "New AI tools added weekly – never miss the latest innovations",
+      title: t.home.benefitFresh,
+      description: t.home.benefitFreshDesc,
     },
     {
       icon: Target,
-      title: "Personalized Matches",
-      description: "Get recommendations tailored to your specific needs and goals",
+      title: t.home.benefitMatch,
+      description: t.home.benefitMatchDesc,
     },
+  ];
+
+  const bullets = [
+    t.home.valueBullet1,
+    t.home.valueBullet2,
+    t.home.valueBullet3,
+    t.home.valueBullet4,
   ];
 
   return (
@@ -30,26 +40,17 @@ export default function ValueProposition() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-              Most people don't know what{" "}
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                AI can already do
-              </span>{" "}
-              for them
+              {t.home.valueTitle}
             </h2>
             <p className="text-slate-300 text-lg mb-6 leading-relaxed">
-              Every week, new AI tools launch – for business automation, personal productivity, creative projects, learning, and more. But most people don't have time to track what's possible or figure out which tools actually work.
+              {t.home.valueDesc1}
             </p>
             <p className="text-slate-400 mb-8">
-              Whether you're running a business or looking for personal AI tools, COARUS AI helps you discover the right solutions – without the hype or technical jargon.
+              {t.home.valueDesc2}
             </p>
             
             <div className="space-y-3">
-              {[
-                "Curated recommendations from 155+ verified AI tools",
-                "Updated weekly with the latest launches",
-                "Two paths: Business tools OR Personal AI companions",
-                "Free, no signup required",
-              ].map((item, i) => (
+              {bullets.map((item, i) => (
                 <div key={i} className="flex items-center gap-3 text-slate-300">
                   <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
                     <Check className="w-3 h-3 text-primary" />

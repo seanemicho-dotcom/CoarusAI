@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-white">Navigation</h4>
+            <h4 className="font-semibold mb-4 text-white">{t.footer.navigation}</h4>
             <ul className="space-y-3">
               <li>
                 <Link href="/">
@@ -52,7 +52,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4 text-white">Contact</h4>
+            <h4 className="font-semibold mb-4 text-white">{t.footer.contact}</h4>
             <ul className="space-y-3">
               <li>
                 <a href="mailto:info@coarus.com" className="text-slate-400 hover:text-white cursor-pointer transition-colors">
@@ -68,8 +68,8 @@ export default function Footer() {
             © 2025 COARUS. {t.footer.copyright}
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
-            <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-slate-300 transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-slate-300 transition-colors">{t.footer.privacyPolicy}</a>
+            <a href="#" className="hover:text-slate-300 transition-colors">{t.footer.termsOfService}</a>
           </div>
         </div>
       </div>

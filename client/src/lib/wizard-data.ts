@@ -13,15 +13,6 @@ export interface WizardState {
   // Individual Path
   personalIntents: string[];
   personalGoals: string[];
-  companionTypes: string[];
-  isAdultPath: boolean;
-  ageVerified: boolean;
-  contentLevel: string;
-  safeWord: string;
-  allowStrongLanguage: boolean;
-  noHumiliation: boolean;
-  allowFantasyCharacters: boolean;
-  devicePreference: string;
 }
 
 export const initialWizardState: WizardState = {
@@ -35,15 +26,6 @@ export const initialWizardState: WizardState = {
   monthlyBudget: "",
   personalIntents: [],
   personalGoals: [],
-  companionTypes: [],
-  isAdultPath: false,
-  ageVerified: false,
-  contentLevel: "",
-  safeWord: "",
-  allowStrongLanguage: false,
-  noHumiliation: true,
-  allowFantasyCharacters: false,
-  devicePreference: "both",
 };
 
 export const businessTypes = [
@@ -102,8 +84,6 @@ export const personalIntents = [
   { id: "career", label: "Job & career support", icon: "Briefcase" },
   { id: "finance", label: "Personal finance organization", icon: "DollarSign" },
   { id: "entertainment", label: "Entertainment / fun / creativity", icon: "Gamepad2" },
-  { id: "companionship", label: "Companionship & emotional support", icon: "Heart" },
-  { id: "adult", label: "Romantic or fantasy experiences (18+)", icon: "Flame" },
 ];
 
 export const personalGoals = [
@@ -113,21 +93,6 @@ export const personalGoals = [
   { id: "job-tasks", label: "Get help with job tasks", icon: "Briefcase" },
   { id: "track-finances", label: "Track and plan my personal finances", icon: "Wallet" },
   { id: "creative", label: "Generate creative content", icon: "Palette" },
-];
-
-export const companionTypes = [
-  { id: "emotional", label: "Emotional support / someone to talk to", icon: "Heart" },
-  { id: "daily-chat", label: "Daily conversation & check-ins", icon: "MessageCircle" },
-  { id: "romantic", label: "Romantic simulation / virtual partner", icon: "HeartHandshake" },
-  { id: "friendship", label: "Friendship & casual company", icon: "Users" },
-  { id: "roleplay", label: "Character or roleplay (fantasy, anime, etc.)", icon: "Drama" },
-  { id: "erotic", label: "Erotic / sexual fantasy roleplay (18+)", icon: "Flame" },
-];
-
-export const contentLevels = [
-  { value: "companion-only", label: "Companionship only - friendly / emotional support, no explicit content", color: "bg-gray-100" },
-  { value: "romantic", label: "Romantic + suggestive - flirting and romance, but no explicit descriptions", color: "bg-yellow-100" },
-  { value: "explicit", label: "Explicit adult content allowed - erotic or sexual themes", color: "bg-red-100" },
 ];
 
 export const languages = {

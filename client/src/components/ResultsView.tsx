@@ -12,14 +12,16 @@ interface ResultsViewProps {
 }
 
 const categoryLabels: Record<string, string> = {
-  "marketing": "Marketing",
-  "customer-service": "Customer Service",
   "bookkeeping": "Bookkeeping",
+  "invoicing": "Invoicing",
+  "marketing": "Marketing",
+  "social media": "Social Media",
+  "customer service": "Customer Service",
+  "sales crm": "Sales CRM",
   "productivity": "Productivity",
-  "crm": "CRM",
-  "project-management": "Project Management",
+  "project management": "Project Management",
+  "writing": "Writing",
   "education": "Education",
-  "content-creation": "Content Creation",
 };
 
 export default function ResultsView({ category, tools, userNeed }: ResultsViewProps) {

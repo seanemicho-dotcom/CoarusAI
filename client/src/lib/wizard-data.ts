@@ -82,7 +82,6 @@ export const personalIntents = [
   { id: "learning", label: "Learning & Skills", icon: "GraduationCap" },
   { id: "creative", label: "Creative Studio", icon: "Palette" },
   { id: "writing", label: "Writing & Content", icon: "PenLine" },
-  { id: "companions", label: "AI Companions", icon: "MessageCircle" },
 ];
 
 export const personalGoalsByIntent: Record<string, { id: string; label: string; icon: string }[]> = {
@@ -113,13 +112,6 @@ export const personalGoalsByIntent: Record<string, { id: string; label: string; 
     { id: "improve-grammar", label: "Improve grammar and style", icon: "CheckCircle" },
     { id: "creative-writing", label: "Creative writing and storytelling", icon: "Feather" },
     { id: "social-posts", label: "Create social media content", icon: "Share2" },
-  ],
-  companions: [
-    { id: "ai-chat-friend", label: "Chat with an AI friend", icon: "MessageCircle" },
-    { id: "roleplay-stories", label: "Interactive stories and roleplay", icon: "BookOpen" },
-    { id: "emotional-support", label: "Emotional support and conversation", icon: "Heart" },
-    { id: "gaming-companion", label: "Gaming tips and companions", icon: "Gamepad2" },
-    { id: "virtual-assistant", label: "Personal virtual assistant", icon: "Brain" },
   ],
 };
 

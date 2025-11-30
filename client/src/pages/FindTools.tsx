@@ -29,6 +29,7 @@ export default function FindTools() {
             result={result}
             userPath={wizardState.path!}
             wizardState={wizardState}
+            onStartOver={handleStartOver}
           />
         ) : (
           <Wizard onComplete={handleComplete} />

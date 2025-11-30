@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react";
-import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -14,6 +13,7 @@ interface EnhancedResultsViewProps {
   result: MatchResult;
   userPath: UserPath;
   wizardState: WizardState;
+  onStartOver: () => void;
 }
 
 const categoryLabels: Record<string, string> = {
@@ -35,6 +35,7 @@ export default function EnhancedResultsView({
   result, 
   userPath, 
   wizardState,
+  onStartOver,
 }: EnhancedResultsViewProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSource, setModalSource] = useState<LeadSource>("email_results");
@@ -54,11 +55,14 @@ export default function EnhancedResultsView({
   return (
     <div className="max-w-5xl mx-auto">
       <div className="mb-8">
-        <Link href="/find-tools">
-          <Button variant="ghost" className="mb-4" data-testid="button-back">
-            <ArrowLeft className="mr-2 w-4 h-4" /> {t.results.startOver}
-          </Button>
-        </Link>
+        <Button 
+          variant="ghost" 
+          className="mb-4" 
+          onClick={onStartOver}
+          data-testid="button-back"
+        >
+          <ArrowLeft className="mr-2 w-4 h-4" /> {t.results.startOver}
+        </Button>
         
         <div className="flex items-center gap-3 mb-3 flex-wrap">
           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -158,11 +162,13 @@ export default function EnhancedResultsView({
       )}
       
       <div className="mt-8 text-center">
-        <Link href="/find-tools">
-          <Button variant="outline" data-testid="button-start-over">
-            {t.results.startOver}
-          </Button>
-        </Link>
+        <Button 
+          variant="outline" 
+          onClick={onStartOver}
+          data-testid="button-start-over"
+        >
+          {t.results.startOver}
+        </Button>
       </div>
       
       <LeadCaptureModal

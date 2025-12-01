@@ -82,6 +82,10 @@ export const personalIntents = [
   { id: "learning", label: "Learning & Skills", icon: "GraduationCap" },
   { id: "creative", label: "Creative Studio", icon: "Palette" },
   { id: "writing", label: "Writing & Content", icon: "PenLine" },
+  { id: "health", label: "Health & Wellness", icon: "Heart" },
+  { id: "entertainment", label: "Entertainment & Fun", icon: "Gamepad2" },
+  { id: "finance", label: "Finance & Money", icon: "Wallet" },
+  { id: "communication", label: "Communication & Social", icon: "MessageCircle" },
 ];
 
 export const personalGoalsByIntent: Record<string, { id: string; label: string; icon: string }[]> = {
@@ -112,6 +116,34 @@ export const personalGoalsByIntent: Record<string, { id: string; label: string; 
     { id: "improve-grammar", label: "Improve grammar and style", icon: "CheckCircle" },
     { id: "creative-writing", label: "Creative writing and storytelling", icon: "Feather" },
     { id: "social-posts", label: "Create social media content", icon: "Share2" },
+  ],
+  health: [
+    { id: "fitness-tracking", label: "Track fitness and workouts", icon: "Dumbbell" },
+    { id: "meditation", label: "Meditation and mindfulness", icon: "Leaf" },
+    { id: "nutrition", label: "Nutrition and meal planning", icon: "Apple" },
+    { id: "sleep", label: "Improve sleep quality", icon: "Moon" },
+    { id: "mental-health", label: "Mental health and stress relief", icon: "Brain" },
+  ],
+  entertainment: [
+    { id: "gaming", label: "Gaming assistance and tips", icon: "Gamepad2" },
+    { id: "movies-shows", label: "Movie and show recommendations", icon: "Clapperboard" },
+    { id: "music-discovery", label: "Discover new music", icon: "Music" },
+    { id: "trivia-games", label: "Trivia and quiz games", icon: "HelpCircle" },
+    { id: "storytelling", label: "Interactive storytelling", icon: "BookOpen" },
+  ],
+  finance: [
+    { id: "budgeting", label: "Budgeting and expense tracking", icon: "PiggyBank" },
+    { id: "investing", label: "Investment guidance", icon: "TrendingUp" },
+    { id: "tax-help", label: "Tax preparation help", icon: "Calculator" },
+    { id: "savings", label: "Savings goals and planning", icon: "Target" },
+    { id: "financial-literacy", label: "Learn about personal finance", icon: "GraduationCap" },
+  ],
+  communication: [
+    { id: "language-translation", label: "Translate languages in real-time", icon: "Globe" },
+    { id: "conversation-practice", label: "Practice conversations", icon: "MessageCircle" },
+    { id: "relationship-advice", label: "Relationship and social advice", icon: "Heart" },
+    { id: "networking", label: "Professional networking help", icon: "Users" },
+    { id: "public-speaking", label: "Improve public speaking", icon: "Mic" },
   ],
 };
 

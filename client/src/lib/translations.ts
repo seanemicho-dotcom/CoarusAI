@@ -175,6 +175,10 @@ export interface Translations {
     learning: string;
     creative: string;
     writing: string;
+    health: string;
+    entertainment: string;
+    financePersonal: string;
+    communication: string;
     // Personal Goals - Productivity
     organizeTasks: string;
     manageSchedule: string;
@@ -199,6 +203,30 @@ export interface Translations {
     improveGrammar: string;
     creativeWriting: string;
     socialPosts: string;
+    // Personal Goals - Health
+    fitnessTracking: string;
+    meditation: string;
+    nutrition: string;
+    sleep: string;
+    mentalHealth: string;
+    // Personal Goals - Entertainment
+    gaming: string;
+    moviesShows: string;
+    musicDiscovery: string;
+    triviaGames: string;
+    storytelling: string;
+    // Personal Goals - Finance
+    budgeting: string;
+    investing: string;
+    taxHelp: string;
+    savings: string;
+    financialLiteracy: string;
+    // Personal Goals - Communication
+    languageTranslation: string;
+    conversationPractice: string;
+    relationshipAdvice: string;
+    networking: string;
+    publicSpeaking: string;
     // Default Goals
     saveTimeGoal: string;
     beCreative: string;
@@ -429,6 +457,10 @@ const en: Translations = {
     learning: "Learning & Skills",
     creative: "Creative Studio",
     writing: "Writing & Content",
+    health: "Health & Wellness",
+    entertainment: "Entertainment & Fun",
+    financePersonal: "Finance & Money",
+    communication: "Communication & Social",
     // Personal Goals - Productivity
     organizeTasks: "Organize my tasks and to-do lists",
     manageSchedule: "Manage my calendar and schedule",
@@ -453,6 +485,30 @@ const en: Translations = {
     improveGrammar: "Improve grammar and style",
     creativeWriting: "Creative writing and storytelling",
     socialPosts: "Create social media content",
+    // Personal Goals - Health
+    fitnessTracking: "Track fitness and workouts",
+    meditation: "Meditation and mindfulness",
+    nutrition: "Nutrition and meal planning",
+    sleep: "Improve sleep quality",
+    mentalHealth: "Mental health and stress relief",
+    // Personal Goals - Entertainment
+    gaming: "Gaming assistance and tips",
+    moviesShows: "Movie and show recommendations",
+    musicDiscovery: "Discover new music",
+    triviaGames: "Trivia and quiz games",
+    storytelling: "Interactive storytelling",
+    // Personal Goals - Finance
+    budgeting: "Budgeting and expense tracking",
+    investing: "Investment guidance",
+    taxHelp: "Tax preparation help",
+    savings: "Savings goals and planning",
+    financialLiteracy: "Learn about personal finance",
+    // Personal Goals - Communication
+    languageTranslation: "Translate languages in real-time",
+    conversationPractice: "Practice conversations",
+    relationshipAdvice: "Relationship and social advice",
+    networking: "Professional networking help",
+    publicSpeaking: "Improve public speaking",
     // Default Goals
     saveTimeGoal: "Save time on daily tasks",
     beCreative: "Be more creative",
@@ -697,6 +753,10 @@ const es = mergeWithEnglish({
     learning: "Aprendizaje y Habilidades",
     creative: "Estudio Creativo",
     writing: "Escritura y Contenido",
+    health: "Salud y Bienestar",
+    entertainment: "Entretenimiento y Diversion",
+    financePersonal: "Finanzas y Dinero",
+    communication: "Comunicacion y Social",
     organizeTasks: "Organizar mis tareas y listas de pendientes",
     manageSchedule: "Administrar mi calendario y horario",
     stayFocused: "Mantenerme enfocado y evitar distracciones",
@@ -936,6 +996,10 @@ const zh = mergeWithEnglish({
     learning: "学习与技能",
     creative: "创意工作室",
     writing: "写作与内容",
+    health: "健康与保健",
+    entertainment: "娱乐与乐趣",
+    financePersonal: "理财与金钱",
+    communication: "沟通与社交",
     organizeTasks: "整理我的任务和待办事项",
     manageSchedule: "管理我的日历和日程",
     stayFocused: "保持专注,避免分心",
@@ -1167,6 +1231,10 @@ const fr = mergeWithEnglish({
     learning: "Apprentissage et Competences",
     creative: "Studio Creatif",
     writing: "Ecriture et Contenu",
+    health: "Sante et Bien-etre",
+    entertainment: "Divertissement et Plaisir",
+    financePersonal: "Finances et Argent",
+    communication: "Communication et Social",
     organizeTasks: "Organiser mes taches et listes de choses a faire",
     manageSchedule: "Gerer mon calendrier et mon emploi du temps",
     stayFocused: "Rester concentre et eviter les distractions",
@@ -1366,6 +1434,10 @@ const ko = mergeWithEnglish({
     learning: "학습 및 기술",
     creative: "크리에이티브 스튜디오",
     writing: "글쓰기 및 콘텐츠",
+    health: "건강 및 웰빙",
+    entertainment: "엔터테인먼트 및 재미",
+    financePersonal: "재정 및 금전",
+    communication: "커뮤니케이션 및 소셜",
     organizeTasks: "작업 및 할 일 목록 정리",
     manageSchedule: "일정 및 스케줄 관리",
     stayFocused: "집중력 유지 및 방해 요소 차단",
@@ -1534,6 +1606,10 @@ const hi = mergeWithEnglish({
     learning: "सीखना और कौशल",
     creative: "क्रिएटिव स्टूडियो",
     writing: "लेखन और सामग्री",
+    health: "स्वास्थ्य और कल्याण",
+    entertainment: "मनोरंजन और मज़ा",
+    financePersonal: "वित्त और धन",
+    communication: "संचार और सामाजिक",
   },
   results: {
     titleSmb: "आपके व्यवसाय के लिए अनुशंसित AI समाधान",
@@ -1698,6 +1774,10 @@ const de = mergeWithEnglish({
     learning: "Lernen und Fahigkeiten",
     creative: "Kreativstudio",
     writing: "Schreiben und Inhalt",
+    health: "Gesundheit und Wohlbefinden",
+    entertainment: "Unterhaltung und Spass",
+    financePersonal: "Finanzen und Geld",
+    communication: "Kommunikation und Soziales",
   },
   results: {
     titleSmb: "Empfohlene KI-Losungen fur Ihr Unternehmen",
@@ -1840,6 +1920,10 @@ const it = mergeWithEnglish({
     learning: "Apprendimento e Competenze",
     creative: "Studio Creativo",
     writing: "Scrittura e Contenuti",
+    health: "Salute e Benessere",
+    entertainment: "Intrattenimento e Divertimento",
+    financePersonal: "Finanza e Denaro",
+    communication: "Comunicazione e Social",
   },
   results: {
     titleSmb: "Soluzioni IA Raccomandate per la Tua Azienda",
@@ -2004,6 +2088,10 @@ const ja = mergeWithEnglish({
     learning: "学習とスキル",
     creative: "クリエイティブスタジオ",
     writing: "ライティングとコンテンツ",
+    health: "健康とウェルネス",
+    entertainment: "エンターテインメントと楽しみ",
+    financePersonal: "ファイナンスとお金",
+    communication: "コミュニケーションとソーシャル",
   },
   results: {
     titleSmb: "あなたのビジネスにおすすめのAIソリューション",
@@ -2145,6 +2233,10 @@ const bn = mergeWithEnglish({
     learning: "শেখা এবং দক্ষতা",
     creative: "সৃজনশীল স্টুডিও",
     writing: "লেখা এবং কন্টেন্ট",
+    health: "স্বাস্থ্য এবং সুস্থতা",
+    entertainment: "বিনোদন এবং মজা",
+    financePersonal: "অর্থ এবং টাকা",
+    communication: "যোগাযোগ এবং সামাজিক",
   },
   results: {
     titleSmb: "আপনার ব্যবসার জন্য প্রস্তাবিত AI সমাধান",
@@ -2309,6 +2401,10 @@ const ru = mergeWithEnglish({
     learning: "Обучение и навыки",
     creative: "Креативная студия",
     writing: "Написание и контент",
+    health: "Здоровье и благополучие",
+    entertainment: "Развлечения и веселье",
+    financePersonal: "Финансы и деньги",
+    communication: "Общение и социальное",
   },
   results: {
     titleSmb: "Рекомендуемые ИИ-решения для вашего бизнеса",
@@ -2455,6 +2551,10 @@ const ar = mergeWithEnglish({
     learning: "التعلم والمهارات",
     creative: "الاستوديو الإبداعي",
     writing: "الكتابة والمحتوى",
+    health: "الصحة والعافية",
+    entertainment: "الترفيه والمرح",
+    financePersonal: "المالية والمال",
+    communication: "التواصل والاجتماعي",
   },
   results: {
     titleSmb: "حلول الذكاء الاصطناعي الموصى بها لعملك",
@@ -2623,6 +2723,10 @@ const pt = mergeWithEnglish({
     learning: "Aprendizagem e Habilidades",
     creative: "Estudio Criativo",
     writing: "Escrita e Conteudo",
+    health: "Saude e Bem-estar",
+    entertainment: "Entretenimento e Diversao",
+    financePersonal: "Financas e Dinheiro",
+    communication: "Comunicacao e Social",
   },
   results: {
     titleSmb: "Solucoes de IA Recomendadas para Seu Negocio",

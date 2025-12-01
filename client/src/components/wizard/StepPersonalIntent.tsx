@@ -18,6 +18,10 @@ const intentTranslationMap: Record<string, keyof import("@/lib/translations").Tr
   "learning": "learning",
   "creative": "creative",
   "writing": "writing",
+  "health": "health",
+  "entertainment": "entertainment",
+  "finance": "financePersonal",
+  "communication": "communication",
 };
 
 export default function StepPersonalIntent({ selected, onChange, onNext, onBack }: StepPersonalIntentProps) {

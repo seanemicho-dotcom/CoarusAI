@@ -82,6 +82,32 @@ Preferred communication style: Simple, everyday language.
 
 **Results Display**: `EnhancedResultsView` component presents recommendations with fit scores, tool cards, category labels, and appropriate content warnings for adult/NSFW results.
 
+### Internationalization (i18n)
+
+**Language Support**: Full translation system supporting 13 languages:
+- English (en) - Default
+- Spanish (es)
+- Chinese Simplified (zh)
+- French (fr)
+- Korean (ko)
+- Hindi (hi)
+- German (de)
+- Italian (it)
+- Japanese (ja)
+- Bengali (bn)
+- Russian (ru)
+- Arabic (ar)
+- Portuguese (pt)
+
+**Implementation**: 
+- `LanguageContext` provides app-wide language state with `useLanguage()` hook
+- `translations.ts` contains all translation strings organized by section (header, home, wizard, wizardOptions, results, categories, footer, leadModal)
+- `mergeWithEnglish()` helper ensures fallback to English for any missing translations
+- Language toggle in header allows users to switch languages at any time
+- Selected language persists via React Context
+
+**Wizard Translations**: All wizard step options (business types, problems, priorities, personal goals) are fully translated across all 13 languages using the `wizardOptions` translation section.
+
 ## External Dependencies
 
 ### Third-Party UI Libraries

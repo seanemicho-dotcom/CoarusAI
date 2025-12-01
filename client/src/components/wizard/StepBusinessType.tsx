@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import MultiSelectGrid from "./MultiSelectGrid";
 import { businessTypes } from "@/lib/wizard-data";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 interface StepBusinessTypeProps {
   selected: string[];
@@ -13,9 +13,26 @@ interface StepBusinessTypeProps {
   onBack: () => void;
 }
 
+const businessTypeTranslationMap: Record<string, keyof import("@/lib/translations").Translations["wizardOptions"]> = {
+  "small-mid": "smallMid",
+  "manufacturing": "manufacturing",
+  "retail": "retail",
+  "services": "services",
+  "saas": "saas",
+  "hospitality": "hospitality",
+  "logistics": "logistics",
+};
+
 export default function StepBusinessType({ selected, onChange, onNext, onBack }: StepBusinessTypeProps) {
   const [otherText, setOtherText] = useState("");
   const { t } = useLanguage();
+
+  const translatedOptions = useMemo(() => {
+    return businessTypes.map(option => ({
+      ...option,
+      label: t.wizardOptions[businessTypeTranslationMap[option.id] as keyof typeof t.wizardOptions] || option.label
+    }));
+  }, [t]);
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -27,14 +44,14 @@ export default function StepBusinessType({ selected, onChange, onNext, onBack }:
       </p>
       
       <MultiSelectGrid
-        options={businessTypes}
+        options={translatedOptions}
         selected={selected}
         onChange={onChange}
       />
       
       <div className="mt-4">
         <Input
-          placeholder="Other (please specify)"
+          placeholder={t.wizardOptions.other}
           value={otherText}
           onChange={(e) => setOtherText(e.target.value)}
           className="max-w-md"

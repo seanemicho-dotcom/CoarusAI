@@ -3,8 +3,9 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight, GripVertical, Clock, DollarSign, TrendingUp, Heart, Zap, BarChart } from "lucide-react";
 import { businessPriorities } from "@/lib/wizard-data";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import type { LucideIcon } from "lucide-react";
+import type { Translations } from "@/lib/translations";
 
 interface StepBusinessPrioritiesProps {
   selected: string[];
@@ -22,25 +23,49 @@ const iconMap: Record<string, LucideIcon> = {
   BarChart,
 };
 
-function getOrderedItems(selected: string[]) {
-  if (selected.length === 0) {
-    return businessPriorities;
-  }
-  const selectedSet = new Set(selected);
-  const selectedItems = selected
-    .map(id => businessPriorities.find(p => p.id === id))
-    .filter(Boolean) as typeof businessPriorities;
-  const remainingItems = businessPriorities.filter(p => !selectedSet.has(p.id));
-  return [...selectedItems, ...remainingItems];
-}
+const prioritiesTranslationMap: Record<string, keyof Translations["wizardOptions"]> = {
+  "save-time": "saveTime",
+  "reduce-cost": "reduceCost",
+  "increase-revenue": "increaseRevenue",
+  "customer-experience": "customerExperience",
+  "productivity": "productivity",
+  "analytics": "analytics",
+};
 
 export default function StepBusinessPriorities({ selected, onChange, onNext, onBack }: StepBusinessPrioritiesProps) {
-  const [items, setItems] = useState(() => getOrderedItems(selected));
+  const { t } = useLanguage();
   const [draggedItem, setDraggedItem] = useState<string | null>(null);
   const onChangeRef = useRef(onChange);
   const prevSelectedRef = useRef<string[]>([]);
-  const { t } = useLanguage();
   onChangeRef.current = onChange;
+
+  const translatedPriorities = useMemo(() => {
+    return businessPriorities.map(option => ({
+      ...option,
+      label: t.wizardOptions[prioritiesTranslationMap[option.id] as keyof typeof t.wizardOptions] || option.label
+    }));
+  }, [t]);
+
+  const [items, setItems] = useState(() => {
+    if (selected.length === 0) {
+      return translatedPriorities;
+    }
+    const selectedSet = new Set(selected);
+    const selectedItems = selected
+      .map(id => translatedPriorities.find(p => p.id === id))
+      .filter(Boolean) as typeof translatedPriorities;
+    const remainingItems = translatedPriorities.filter(p => !selectedSet.has(p.id));
+    return [...selectedItems, ...remainingItems];
+  });
+
+  useEffect(() => {
+    setItems(prev => {
+      return prev.map(item => {
+        const translated = translatedPriorities.find(p => p.id === item.id);
+        return translated ? { ...item, label: translated.label } : item;
+      });
+    });
+  }, [translatedPriorities]);
 
   useEffect(() => {
     const newSelected = items.slice(0, 3).map(i => i.id);
@@ -86,7 +111,7 @@ export default function StepBusinessPriorities({ selected, onChange, onNext, onB
         {t.wizard.businessPriorities}
       </h2>
       <p className="text-muted-foreground mb-6">
-        Drag to rank your top 3 priorities.
+        {t.wizard.selectAll}
       </p>
       
       <div className="space-y-3">

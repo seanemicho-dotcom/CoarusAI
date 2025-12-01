@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import MultiSelectGrid from "./MultiSelectGrid";
 import { businessProblems } from "@/lib/wizard-data";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 interface StepBusinessProblemsProps {
   selected: string[];
@@ -13,9 +13,28 @@ interface StepBusinessProblemsProps {
   onBack: () => void;
 }
 
+const problemsTranslationMap: Record<string, keyof import("@/lib/translations").Translations["wizardOptions"]> = {
+  "customer-support": "customerSupport",
+  "sales-crm": "salesCrm",
+  "marketing-seo": "marketingSeo",
+  "email-messaging": "emailMessaging",
+  "dashboards": "dashboards",
+  "finance": "finance",
+  "knowledge-base": "knowledgeBase",
+  "hr-hiring": "hrHiring",
+  "workflow": "workflow",
+};
+
 export default function StepBusinessProblems({ selected, onChange, onNext, onBack }: StepBusinessProblemsProps) {
   const [customWorkflow, setCustomWorkflow] = useState("");
   const { t } = useLanguage();
+
+  const translatedOptions = useMemo(() => {
+    return businessProblems.map(option => ({
+      ...option,
+      label: t.wizardOptions[problemsTranslationMap[option.id] as keyof typeof t.wizardOptions] || option.label
+    }));
+  }, [t]);
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -27,7 +46,7 @@ export default function StepBusinessProblems({ selected, onChange, onNext, onBac
       </p>
       
       <MultiSelectGrid
-        options={businessProblems}
+        options={translatedOptions}
         selected={selected}
         onChange={onChange}
         columns={2}
@@ -35,7 +54,7 @@ export default function StepBusinessProblems({ selected, onChange, onNext, onBac
       
       <div className="mt-4">
         <Input
-          placeholder="Custom workflow (optional)"
+          placeholder={t.wizard.customWorkflow}
           value={customWorkflow}
           onChange={(e) => setCustomWorkflow(e.target.value)}
           className="max-w-md"

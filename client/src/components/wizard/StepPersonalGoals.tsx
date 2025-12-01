@@ -7,6 +7,7 @@ import MultiSelectGrid from "./MultiSelectGrid";
 import { getPersonalGoalsForIntents } from "@/lib/wizard-data";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useMemo } from "react";
+import type { Translations } from "@/lib/translations";
 
 interface StepPersonalGoalsProps {
   selected: string[];
@@ -16,6 +17,34 @@ interface StepPersonalGoalsProps {
   onBack: () => void;
   isSubmitting: boolean;
 }
+
+const goalsTranslationMap: Record<string, keyof Translations["wizardOptions"]> = {
+  "organize-tasks": "organizeTasks",
+  "manage-schedule": "manageSchedule",
+  "stay-focused": "stayFocused",
+  "build-habits": "buildHabits",
+  "take-notes": "takeNotes",
+  "understand-topics": "understandTopics",
+  "learn-language": "learnLanguage",
+  "study-help": "studyHelp",
+  "research": "research",
+  "skill-building": "skillBuilding",
+  "generate-art": "generateArt",
+  "create-music": "createMusic",
+  "video-editing": "videoEditing",
+  "design-graphics": "designGraphics",
+  "creative-projects": "creativeProjects",
+  "write-emails": "writeEmails",
+  "write-essays": "writeEssays",
+  "improve-grammar": "improveGrammar",
+  "creative-writing": "creativeWriting",
+  "social-posts": "socialPosts",
+  "save-time": "saveTimeGoal",
+  "be-creative": "beCreative",
+  "learn-something": "learnSomething",
+  "have-fun": "haveFun",
+  "stay-organized": "stayOrganized",
+};
 
 export default function StepPersonalGoals({ 
   selected, 
@@ -30,8 +59,12 @@ export default function StepPersonalGoals({
   const { t } = useLanguage();
 
   const goalOptions = useMemo(() => {
-    return getPersonalGoalsForIntents(selectedIntents);
-  }, [selectedIntents]);
+    const goals = getPersonalGoalsForIntents(selectedIntents);
+    return goals.map(goal => ({
+      ...goal,
+      label: t.wizardOptions[goalsTranslationMap[goal.id] as keyof typeof t.wizardOptions] || goal.label
+    }));
+  }, [selectedIntents, t]);
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -39,7 +72,7 @@ export default function StepPersonalGoals({
         {t.wizard.personalGoals}
       </h2>
       <p className="text-muted-foreground mb-6">
-        Select all that apply.
+        {t.wizard.selectAll}
       </p>
       
       <MultiSelectGrid
@@ -52,8 +85,8 @@ export default function StepPersonalGoals({
       <div className="mt-8 space-y-6">
         <div className="space-y-4">
           <div className="flex justify-between">
-            <Label>Hours per week you want to save</Label>
-            <span className="text-sm font-medium">{hoursToSave}+ hours</span>
+            <Label>{t.wizard.hoursToSave}</Label>
+            <span className="text-sm font-medium">{hoursToSave}+ {t.wizard.hoursUnit}</span>
           </div>
           <Slider
             value={[hoursToSave]}
@@ -67,7 +100,7 @@ export default function StepPersonalGoals({
         </div>
 
         <div className="space-y-3">
-          <Label>What device(s) do you primarily use?</Label>
+          <Label>{t.wizard.deviceQuestion}</Label>
           <RadioGroup 
             value={devicePreference} 
             onValueChange={setDevicePreference}
@@ -75,15 +108,15 @@ export default function StepPersonalGoals({
           >
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="mobile" id="mobile" />
-              <Label htmlFor="mobile" className="cursor-pointer">Mobile</Label>
+              <Label htmlFor="mobile" className="cursor-pointer">{t.wizard.mobile}</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="desktop" id="desktop" />
-              <Label htmlFor="desktop" className="cursor-pointer">Desktop</Label>
+              <Label htmlFor="desktop" className="cursor-pointer">{t.wizard.desktop}</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="both" id="both" />
-              <Label htmlFor="both" className="cursor-pointer">Both</Label>
+              <Label htmlFor="both" className="cursor-pointer">{t.wizard.both}</Label>
             </div>
           </RadioGroup>
         </div>

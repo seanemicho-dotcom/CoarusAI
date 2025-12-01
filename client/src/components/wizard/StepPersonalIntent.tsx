@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import MultiSelectGrid from "./MultiSelectGrid";
 import { personalIntents } from "@/lib/wizard-data";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 interface StepPersonalIntentProps {
   selected: string[];
@@ -13,9 +13,23 @@ interface StepPersonalIntentProps {
   onBack: () => void;
 }
 
+const intentTranslationMap: Record<string, keyof import("@/lib/translations").Translations["wizardOptions"]> = {
+  "productivity": "personalProductivity",
+  "learning": "learning",
+  "creative": "creative",
+  "writing": "writing",
+};
+
 export default function StepPersonalIntent({ selected, onChange, onNext, onBack }: StepPersonalIntentProps) {
   const [otherText, setOtherText] = useState("");
   const { t } = useLanguage();
+
+  const translatedOptions = useMemo(() => {
+    return personalIntents.map(option => ({
+      ...option,
+      label: t.wizardOptions[intentTranslationMap[option.id] as keyof typeof t.wizardOptions] || option.label
+    }));
+  }, [t]);
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -27,7 +41,7 @@ export default function StepPersonalIntent({ selected, onChange, onNext, onBack 
       </p>
       
       <MultiSelectGrid
-        options={personalIntents}
+        options={translatedOptions}
         selected={selected}
         onChange={onChange}
         columns={2}
@@ -35,7 +49,7 @@ export default function StepPersonalIntent({ selected, onChange, onNext, onBack 
       
       <div className="mt-4">
         <Input
-          placeholder="Other (please specify)"
+          placeholder={t.wizardOptions.other}
           value={otherText}
           onChange={(e) => setOtherText(e.target.value)}
           className="max-w-md"

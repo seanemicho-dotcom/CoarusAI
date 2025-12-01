@@ -5,8 +5,8 @@ import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Loader2, Search } from "lucide-react";
-import { workflowAreas, budgetOptions } from "@/lib/wizard-data";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useMemo } from "react";
 
 interface StepWorkflowDetailsProps {
   workflowArea: string;
@@ -21,6 +21,24 @@ interface StepWorkflowDetailsProps {
   onBack: () => void;
   isSubmitting: boolean;
 }
+
+const workflowAreaKeys = [
+  "customerSupport",
+  "salesCrm",
+  "marketingSeo",
+  "finance",
+  "operations",
+  "hrHiring",
+  "admin",
+  "other",
+] as const;
+
+const budgetOptionKeys = [
+  { value: "0-100", key: "budget0" },
+  { value: "100-500", key: "budget100" },
+  { value: "500-2000", key: "budget500" },
+  { value: "2000+", key: "budget2000" },
+] as const;
 
 export default function StepWorkflowDetails({
   workflowArea,
@@ -37,35 +55,49 @@ export default function StepWorkflowDetails({
 }: StepWorkflowDetailsProps) {
   const { t } = useLanguage();
 
+  const translatedWorkflowAreas = useMemo(() => {
+    return workflowAreaKeys.map(key => ({
+      value: key,
+      label: t.workflowAreas[key]
+    }));
+  }, [t]);
+
+  const translatedBudgetOptions = useMemo(() => {
+    return budgetOptionKeys.map(option => ({
+      value: option.value,
+      label: t.budgetOptions[option.key as keyof typeof t.budgetOptions]
+    }));
+  }, [t]);
+
   return (
     <div className="max-w-2xl mx-auto">
       <h2 className="text-2xl md:text-3xl font-semibold mb-2" data-testid="text-step-title">
         {t.wizard.workflowArea}
       </h2>
       <p className="text-muted-foreground mb-6">
-        This helps us find the best-fit AI solutions for your needs.
+        {t.wizard.workflowAreaDesc}
       </p>
       
       <div className="space-y-6">
         <div className="space-y-2">
-          <Label>Main process to improve</Label>
+          <Label>{t.wizard.mainProcess}</Label>
           <Select value={workflowArea} onValueChange={onWorkflowAreaChange}>
             <SelectTrigger data-testid="select-workflow-area">
-              <SelectValue placeholder="Select an area" />
+              <SelectValue placeholder={t.wizard.selectArea} />
             </SelectTrigger>
             <SelectContent>
-              {workflowAreas.map((area) => (
-                <SelectItem key={area} value={area}>{area}</SelectItem>
+              {translatedWorkflowAreas.map((area) => (
+                <SelectItem key={area.value} value={area.value}>{area.label}</SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="description">Describe what happens today</Label>
+          <Label htmlFor="description">{t.wizard.describeToday}</Label>
           <Textarea
             id="description"
-            placeholder="Example: We manually respond to customer emails, prepare weekly reports in Excel, and track inventory on spreadsheets..."
+            placeholder={t.wizard.describeExample}
             value={workflowDescription}
             onChange={(e) => onWorkflowDescriptionChange(e.target.value)}
             className="min-h-[100px]"
@@ -75,8 +107,8 @@ export default function StepWorkflowDetails({
 
         <div className="space-y-4">
           <div className="flex justify-between">
-            <Label>Hours spent per week on this process</Label>
-            <span className="text-sm font-medium">{hoursPerWeek}+ hours</span>
+            <Label>{t.wizard.hoursSpent}</Label>
+            <span className="text-sm font-medium">{hoursPerWeek}+ {t.wizard.hoursUnit}</span>
           </div>
           <Slider
             value={[hoursPerWeek]}
@@ -97,13 +129,13 @@ export default function StepWorkflowDetails({
         </div>
 
         <div className="space-y-3">
-          <Label>Approximate monthly budget for AI solutions</Label>
+          <Label>{t.wizard.budgetQuestion}</Label>
           <RadioGroup 
             value={monthlyBudget} 
             onValueChange={onBudgetChange}
             className="grid grid-cols-2 gap-3"
           >
-            {budgetOptions.map((option) => (
+            {translatedBudgetOptions.map((option) => (
               <div key={option.value} className="flex items-center space-x-2">
                 <RadioGroupItem value={option.value} id={option.value} data-testid={`radio-budget-${option.value}`} />
                 <Label htmlFor={option.value} className="cursor-pointer">{option.label}</Label>

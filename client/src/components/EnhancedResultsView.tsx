@@ -8,6 +8,7 @@ import LeadCaptureModal from "./LeadCaptureModal";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { MatchResult } from "@/lib/tools";
 import type { WizardState, UserPath } from "@/lib/wizard-data";
+import type { Translations } from "@/lib/translations";
 
 interface EnhancedResultsViewProps {
   result: MatchResult;
@@ -16,17 +17,19 @@ interface EnhancedResultsViewProps {
   onStartOver: () => void;
 }
 
-const categoryLabels: Record<string, string> = {
-  "customer-support": "Customer Support",
-  "sales-crm": "Sales & CRM",
-  "marketing-seo": "Marketing & SEO",
-  "social-media": "Social Media",
-  "finance": "Finance & Accounting",
-  "hr-hiring": "HR & Hiring",
-  "productivity": "Productivity",
-  "writing": "Writing & Content",
-  "education": "Learning & Education",
-  "personal-finance": "Personal Finance",
+const categoryKeyMap: Record<string, keyof Translations["categories"]> = {
+  "customer-support": "customerSupport",
+  "sales-crm": "salesCrm",
+  "marketing-seo": "marketingSeo",
+  "social-media": "marketingSeo",
+  "finance": "financeOps",
+  "hr-hiring": "hrHiring",
+  "productivity": "personalProductivity",
+  "writing": "writingContent",
+  "education": "learningSkills",
+  "personal-finance": "financeOps",
+  "creative": "creativeStudio",
+  "learning": "learningSkills",
 };
 
 type LeadSource = "email_results" | "book_call" | "request_quote" | "personal_setup";
@@ -69,7 +72,9 @@ export default function EnhancedResultsView({
             <Sparkles className="w-5 h-5 text-primary" />
           </div>
           <Badge variant="secondary" className="text-sm">
-            {categoryLabels[result.category] || result.category}
+            {categoryKeyMap[result.category] 
+              ? t.categories[categoryKeyMap[result.category]]
+              : result.category}
           </Badge>
           <Button 
             variant="outline" 

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Search, Building2, User } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Hero() {
@@ -30,29 +30,12 @@ export default function Hero() {
           {t.home.heroSubtitle}
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+        <div className="flex justify-center">
           <Link href="/find-tools">
             <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary/90" data-testid="button-hero-cta">
               {t.home.getStarted} <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
-          <Link href="/find-tools">
-            <Button size="lg" variant="outline" className="text-lg px-8 border-slate-600 text-slate-200 hover:bg-slate-800 hover:text-white" data-testid="button-hero-explore">
-              <Search className="mr-2 w-5 h-5" /> {t.home.exploreCategories}
-            </Button>
-          </Link>
-        </div>
-        
-        <div className="flex items-center justify-center gap-6 text-slate-400 text-sm flex-wrap">
-          <div className="flex items-center gap-2">
-            <Building2 className="w-4 h-4" />
-            <span>{t.home.forBusinesses}</span>
-          </div>
-          <div className="w-1 h-1 rounded-full bg-slate-600" />
-          <div className="flex items-center gap-2">
-            <User className="w-4 h-4" />
-            <span>{t.home.forIndividuals}</span>
-          </div>
         </div>
       </div>
     </section>

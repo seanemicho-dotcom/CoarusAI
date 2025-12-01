@@ -20,11 +20,20 @@ import {
 
 interface WizardProps {
   onComplete: (result: MatchResult, state: WizardState) => void;
+  initialState?: WizardState | null;
+  startAtLastStep?: boolean;
 }
 
-export default function Wizard({ onComplete }: WizardProps) {
-  const [state, setState] = useState<WizardState>(initialWizardState);
-  const [step, setStep] = useState(0);
+export default function Wizard({ onComplete, initialState, startAtLastStep }: WizardProps) {
+  const getInitialStep = () => {
+    if (startAtLastStep && initialState?.path) {
+      return initialState.path === "smb" ? 4 : 2;
+    }
+    return 0;
+  };
+  
+  const [state, setState] = useState<WizardState>(initialState || initialWizardState);
+  const [step, setStep] = useState(getInitialStep);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const updateState = <K extends keyof WizardState>(key: K, value: WizardState[K]) => {

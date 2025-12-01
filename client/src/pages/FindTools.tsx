@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Wizard from "@/components/wizard/Wizard";
@@ -9,15 +9,26 @@ import type { WizardState } from "@/lib/wizard-data";
 export default function FindTools() {
   const [result, setResult] = useState<MatchResult | null>(null);
   const [wizardState, setWizardState] = useState<WizardState | null>(null);
+  const [returnToLastStep, setReturnToLastStep] = useState(false);
+  const savedWizardStateRef = useRef<WizardState | null>(null);
 
   const handleComplete = (matchResult: MatchResult, state: WizardState) => {
     setResult(matchResult);
     setWizardState(state);
+    savedWizardStateRef.current = state;
+    setReturnToLastStep(false);
   };
 
   const handleStartOver = () => {
     setResult(null);
     setWizardState(null);
+    savedWizardStateRef.current = null;
+    setReturnToLastStep(false);
+  };
+
+  const handleBack = () => {
+    setResult(null);
+    setReturnToLastStep(true);
   };
 
   return (
@@ -30,9 +41,14 @@ export default function FindTools() {
             userPath={wizardState.path!}
             wizardState={wizardState}
             onStartOver={handleStartOver}
+            onBack={handleBack}
           />
         ) : (
-          <Wizard onComplete={handleComplete} />
+          <Wizard 
+            onComplete={handleComplete} 
+            initialState={returnToLastStep ? savedWizardStateRef.current : null}
+            startAtLastStep={returnToLastStep}
+          />
         )}
       </main>
       <Footer />

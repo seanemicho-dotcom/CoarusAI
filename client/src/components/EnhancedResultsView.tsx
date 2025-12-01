@@ -15,6 +15,7 @@ interface EnhancedResultsViewProps {
   userPath: UserPath;
   wizardState: WizardState;
   onStartOver: () => void;
+  onBack: () => void;
 }
 
 const categoryKeyMap: Record<string, keyof Translations["categories"]> = {
@@ -39,6 +40,7 @@ export default function EnhancedResultsView({
   userPath, 
   wizardState,
   onStartOver,
+  onBack,
 }: EnhancedResultsViewProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSource, setModalSource] = useState<LeadSource>("email_results");
@@ -58,14 +60,22 @@ export default function EnhancedResultsView({
   return (
     <div className="max-w-5xl mx-auto">
       <div className="mb-8">
-        <Button 
-          variant="ghost" 
-          className="mb-4" 
-          onClick={onStartOver}
-          data-testid="button-back"
-        >
-          <ArrowLeft className="mr-2 w-4 h-4" /> {t.results.startOver}
-        </Button>
+        <div className="flex gap-2 mb-4 flex-wrap">
+          <Button 
+            variant="ghost" 
+            onClick={onBack}
+            data-testid="button-back-top"
+          >
+            <ArrowLeft className="mr-2 w-4 h-4" /> {t.results.back}
+          </Button>
+          <Button 
+            variant="ghost" 
+            onClick={onStartOver}
+            data-testid="button-start-over-top"
+          >
+            {t.results.startOver}
+          </Button>
+        </div>
         
         <div className="flex items-center gap-3 mb-3 flex-wrap">
           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -166,11 +176,18 @@ export default function EnhancedResultsView({
         </Card>
       )}
       
-      <div className="mt-8 text-center">
+      <div className="mt-8 flex justify-center gap-3 flex-wrap">
+        <Button 
+          variant="outline" 
+          onClick={onBack}
+          data-testid="button-back-bottom"
+        >
+          <ArrowLeft className="mr-2 w-4 h-4" /> {t.results.back}
+        </Button>
         <Button 
           variant="outline" 
           onClick={onStartOver}
-          data-testid="button-start-over"
+          data-testid="button-start-over-bottom"
         >
           {t.results.startOver}
         </Button>

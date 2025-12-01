@@ -210,6 +210,7 @@ export interface Translations {
     titleSmb: string;
     titleIndividual: string;
     subtitle: string;
+    back: string;
     startOver: string;
     saveResults: string;
     visitTool: string;
@@ -463,6 +464,7 @@ const en: Translations = {
     titleSmb: "Recommended AI Solutions for Your Business",
     titleIndividual: "Recommended AI Tools for You",
     subtitle: "Based on your answers, these tools and combinations may fit your needs.",
+    back: "Back",
     startOver: "Start over",
     saveResults: "Save Results",
     visitTool: "Visit",
@@ -725,6 +727,7 @@ const es = mergeWithEnglish({
     titleSmb: "Soluciones de IA Recomendadas para tu Negocio",
     titleIndividual: "Herramientas de IA Recomendadas para Ti",
     subtitle: "Basado en tus respuestas, estas herramientas pueden ajustarse a tus necesidades.",
+    back: "Atras",
     startOver: "Comenzar de nuevo",
     saveResults: "Guardar Resultados",
     visitTool: "Visitar",
@@ -963,6 +966,7 @@ const zh = mergeWithEnglish({
     titleSmb: "为您的业务推荐的AI解决方案",
     titleIndividual: "为您推荐的AI工具",
     subtitle: "根据您的回答,这些工具和组合可能符合您的需求。",
+    back: "返回",
     startOver: "重新开始",
     saveResults: "保存结果",
     visitTool: "访问",
@@ -1192,6 +1196,7 @@ const fr = mergeWithEnglish({
   results: {
     titleSmb: "Solutions IA Recommandees pour Votre Entreprise",
     titleIndividual: "Outils IA Recommandes pour Vous",
+    back: "Retour",
     startOver: "Recommencer",
     saveResults: "Sauvegarder",
     visitTool: "Visiter",
@@ -1390,6 +1395,7 @@ const ko = mergeWithEnglish({
   results: {
     titleSmb: "비즈니스를 위한 추천 AI 솔루션",
     titleIndividual: "당신을 위한 추천 AI 도구",
+    back: "뒤로",
     startOver: "다시 시작",
     saveResults: "결과 저장",
     visitTool: "방문",
@@ -1528,6 +1534,13 @@ const hi = mergeWithEnglish({
     learning: "सीखना और कौशल",
     creative: "क्रिएटिव स्टूडियो",
     writing: "लेखन और सामग्री",
+  },
+  results: {
+    titleSmb: "आपके व्यवसाय के लिए अनुशंसित AI समाधान",
+    titleIndividual: "आपके लिए अनुशंसित AI उपकरण",
+    subtitle: "आपके उत्तरों के आधार पर, ये उपकरण आपकी आवश्यकताओं के लिए उपयुक्त हो सकते हैं।",
+    back: "वापस",
+    startOver: "फिर से शुरू करें",
   },
   footer: {
     tagline: "सही AI टूल्स खोजने में आपकी मदद करना",
@@ -1686,6 +1699,13 @@ const de = mergeWithEnglish({
     creative: "Kreativstudio",
     writing: "Schreiben und Inhalt",
   },
+  results: {
+    titleSmb: "Empfohlene KI-Losungen fur Ihr Unternehmen",
+    titleIndividual: "Empfohlene KI-Tools fur Sie",
+    subtitle: "Basierend auf Ihren Antworten konnen diese Tools Ihren Anforderungen entsprechen.",
+    back: "Zuruck",
+    startOver: "Neu starten",
+  },
   footer: {
     tagline: "Wir helfen Ihnen, die perfekten KI-Tools zu finden",
     copyright: "Alle Rechte vorbehalten.",
@@ -1820,6 +1840,13 @@ const it = mergeWithEnglish({
     learning: "Apprendimento e Competenze",
     creative: "Studio Creativo",
     writing: "Scrittura e Contenuti",
+  },
+  results: {
+    titleSmb: "Soluzioni IA Raccomandate per la Tua Azienda",
+    titleIndividual: "Strumenti IA Raccomandati per Te",
+    subtitle: "In base alle tue risposte, questi strumenti potrebbero soddisfare le tue esigenze.",
+    back: "Indietro",
+    startOver: "Ricomincia",
   },
   footer: {
     tagline: "Ti aiutiamo a trovare gli strumenti IA perfetti",
@@ -1978,6 +2005,13 @@ const ja = mergeWithEnglish({
     creative: "クリエイティブスタジオ",
     writing: "ライティングとコンテンツ",
   },
+  results: {
+    titleSmb: "あなたのビジネスにおすすめのAIソリューション",
+    titleIndividual: "あなたにおすすめのAIツール",
+    subtitle: "あなたの回答に基づいて、これらのツールがあなたのニーズに合っている可能性があります。",
+    back: "戻る",
+    startOver: "最初からやり直す",
+  },
   footer: {
     tagline: "完璧なAIツールを見つけるお手伝い",
     copyright: "全著作権所有。",
@@ -2111,6 +2145,13 @@ const bn = mergeWithEnglish({
     learning: "শেখা এবং দক্ষতা",
     creative: "সৃজনশীল স্টুডিও",
     writing: "লেখা এবং কন্টেন্ট",
+  },
+  results: {
+    titleSmb: "আপনার ব্যবসার জন্য প্রস্তাবিত AI সমাধান",
+    titleIndividual: "আপনার জন্য প্রস্তাবিত AI সরঞ্জাম",
+    subtitle: "আপনার উত্তরের উপর ভিত্তি করে, এই সরঞ্জামগুলি আপনার প্রয়োজন পূরণ করতে পারে।",
+    back: "পিছনে",
+    startOver: "নতুন করে শুরু করুন",
   },
   footer: {
     tagline: "সঠিক AI টুল খুঁজে পেতে সাহায্য করছি",
@@ -2269,6 +2310,13 @@ const ru = mergeWithEnglish({
     creative: "Креативная студия",
     writing: "Написание и контент",
   },
+  results: {
+    titleSmb: "Рекомендуемые ИИ-решения для вашего бизнеса",
+    titleIndividual: "Рекомендуемые ИИ-инструменты для вас",
+    subtitle: "На основе ваших ответов эти инструменты могут соответствовать вашим потребностям.",
+    back: "Назад",
+    startOver: "Начать заново",
+  },
   footer: {
     tagline: "Помогаем найти идеальные ИИ-инструменты",
     copyright: "Все права защищены.",
@@ -2407,6 +2455,13 @@ const ar = mergeWithEnglish({
     learning: "التعلم والمهارات",
     creative: "الاستوديو الإبداعي",
     writing: "الكتابة والمحتوى",
+  },
+  results: {
+    titleSmb: "حلول الذكاء الاصطناعي الموصى بها لعملك",
+    titleIndividual: "أدوات الذكاء الاصطناعي الموصى بها لك",
+    subtitle: "بناءً على إجاباتك، قد تناسب هذه الأدوات احتياجاتك.",
+    back: "رجوع",
+    startOver: "البدء من جديد",
   },
   footer: {
     tagline: "نساعدك في العثور على أدوات الذكاء الاصطناعي المثالية",
@@ -2568,6 +2623,13 @@ const pt = mergeWithEnglish({
     learning: "Aprendizagem e Habilidades",
     creative: "Estudio Criativo",
     writing: "Escrita e Conteudo",
+  },
+  results: {
+    titleSmb: "Solucoes de IA Recomendadas para Seu Negocio",
+    titleIndividual: "Ferramentas de IA Recomendadas para Voce",
+    subtitle: "Com base nas suas respostas, essas ferramentas podem atender as suas necessidades.",
+    back: "Voltar",
+    startOver: "Comecar de novo",
   },
   footer: {
     tagline: "Ajudando voce a encontrar as ferramentas de IA perfeitas",

@@ -55,7 +55,7 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-white">{t.footer.contact}</h4>
             <ul className="space-y-3">
               <li>
-                <a href="mailto:info@coarus.com" className="text-slate-400 hover:text-white cursor-pointer transition-colors">
+                <a href="mailto:info@coarusai.com" className="text-slate-400 hover:text-white cursor-pointer transition-colors">
                   info@coarus.com
                 </a>
               </li>

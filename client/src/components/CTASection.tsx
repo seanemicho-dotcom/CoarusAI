@@ -36,7 +36,7 @@ export default function CTASection() {
         <div className="flex items-center justify-center gap-2 text-slate-400 text-sm">
           <Mail className="w-4 h-4" />
           <span>{t.home.emailDirect}</span>
-          <a href="mailto:info@coarus.com" className="text-primary hover:underline">info@coarus.com</a>
+          <a href="mailto:info@coarusai.com" className="text-primary hover:underline">info@coarus.com</a>
         </div>
       </div>
     </section>

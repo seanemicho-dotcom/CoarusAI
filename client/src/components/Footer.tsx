@@ -19,7 +19,7 @@ export default function Footer() {
               {t.footer.tagline}
             </p>
             <div className="flex items-center gap-4">
-              <a href="mailto:info@coarus.com" className="text-slate-400 hover:text-white transition-colors">
+              <a href="mailto:info@coarusai.com" className="text-slate-400 hover:text-white transition-colors">
                 <Mail className="w-5 h-5" />
               </a>
               <a href="#" className="text-slate-400 hover:text-white transition-colors">
@@ -56,7 +56,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a href="mailto:info@coarusai.com" className="text-slate-400 hover:text-white cursor-pointer transition-colors">
-                  info@coarus.com
+                  info@coarusai.com
                 </a>
               </li>
             </ul>

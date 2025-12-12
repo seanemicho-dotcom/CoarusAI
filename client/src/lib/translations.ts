@@ -1712,7 +1712,7 @@ const de = mergeWithEnglish({
     next: "Weiter",
     skip: "Uberspringen",
     getResults: "Meine Empfehlungen Erhalten",
-    selectAll: "Wahlen Sie alle zutreffenden aus",
+    selectAll: "Zum Neuordnen nach Priorität ziehen (Top 3)",
     findingTools: "Suche Tools...",
     otherPlaceholder: "Sonstiges (bitte angeben)",
     customWorkflow: "Benutzerdefinierter Workflow (optional)",

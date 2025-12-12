@@ -2171,7 +2171,7 @@ const bn = mergeWithEnglish({
     next: "পরবর্তী",
     skip: "এড়িয়ে যান",
     getResults: "সুপারিশ পান",
-    selectAll: "প্রযোজ্য সব নির্বাচন করুন",
+    selectAll: "অগ্রাধিকার অনুসারে পুনর্বিন্যাস করতে টেনে আনুন (শীর্ষ 3)",
     findingTools: "টুল খোঁজা হচ্ছে...",
     otherPlaceholder: "অন্যান্য (দয়া করে নির্দিষ্ট করুন)",
     customWorkflow: "কাস্টম ওয়ার্কফ্লো (ঐচ্ছিক)",

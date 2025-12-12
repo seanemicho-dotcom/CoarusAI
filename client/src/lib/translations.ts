@@ -1544,7 +1544,7 @@ const hi = mergeWithEnglish({
     next: "आगे",
     skip: "छोड़ें",
     getResults: "मेरी सिफारिशें प्राप्त करें",
-    selectAll: "सभी लागू विकल्प चुनें",
+    selectAll: "प्राथमिकता के अनुसार पुनः क्रमित करने के लिए खींचें (शीर्ष 3)",
     findingTools: "टूल्स खोज रहे हैं...",
     otherPlaceholder: "अन्य (कृपया बताएं)",
     customWorkflow: "कस्टम वर्कफ़्लो (वैकल्पिक)",

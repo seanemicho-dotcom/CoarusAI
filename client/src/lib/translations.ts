@@ -391,7 +391,7 @@ const en: Translations = {
     next: "Next",
     skip: "Skip",
     getResults: "Get My Recommendations",
-    selectAll: "Select all that apply",
+    selectAll: "Drag to reorder by priority (top 3)",
     findingTools: "Finding tools...",
     otherPlaceholder: "Other (please specify)",
     customWorkflow: "Custom workflow (optional)",

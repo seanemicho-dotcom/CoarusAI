@@ -1372,7 +1372,7 @@ const ko = mergeWithEnglish({
     next: "다음",
     skip: "건너뛰기",
     getResults: "추천 받기",
-    selectAll: "해당되는 항목을 모두 선택하세요",
+    selectAll: "우선순위로 재정렬하려면 드래그하세요 (상위 3개)",
     findingTools: "도구 찾는 중...",
     otherPlaceholder: "기타 (직접 입력)",
     customWorkflow: "사용자 정의 워크플로우 (선택사항)",

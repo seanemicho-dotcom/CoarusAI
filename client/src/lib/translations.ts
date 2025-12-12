@@ -2339,7 +2339,7 @@ const ru = mergeWithEnglish({
     next: "Далее",
     skip: "Пропустить",
     getResults: "Получить рекомендации",
-    selectAll: "Выберите все подходящие",
+    selectAll: "Перетащите для сортировки по приоритету (топ 3)",
     findingTools: "Поиск инструментов...",
     otherPlaceholder: "Другое (укажите)",
     customWorkflow: "Пользовательский рабочий процесс (необязательно)",

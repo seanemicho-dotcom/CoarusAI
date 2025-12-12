@@ -2026,7 +2026,7 @@ const ja = mergeWithEnglish({
     next: "次へ",
     skip: "スキップ",
     getResults: "おすすめを取得",
-    selectAll: "該当するものをすべて選択",
+    selectAll: "ドラッグして優先順位で並べ替え（上位3つ）",
     findingTools: "ツールを検索中...",
     otherPlaceholder: "その他（具体的に）",
     customWorkflow: "カスタムワークフロー（任意）",

@@ -934,7 +934,7 @@ const zh = mergeWithEnglish({
     next: "下一步",
     skip: "跳过",
     getResults: "获取我的推荐",
-    selectAll: "选择所有适用项",
+    selectAll: "拖动以按优先级排序（前3项）",
     findingTools: "正在查找工具...",
     otherPlaceholder: "其他（请说明）",
     customWorkflow: "自定义工作流程（可选）",

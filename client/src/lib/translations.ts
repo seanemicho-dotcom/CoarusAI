@@ -691,7 +691,7 @@ const es = mergeWithEnglish({
     next: "Siguiente",
     skip: "Omitir",
     getResults: "Obtener Mis Recomendaciones",
-    selectAll: "Selecciona todas las opciones que correspondan",
+    selectAll: "Arrastra para reordenar por prioridad (top 3)",
     findingTools: "Buscando herramientas...",
     otherPlaceholder: "Otro (por favor especifica)",
     customWorkflow: "Flujo de trabajo personalizado (opcional)",
